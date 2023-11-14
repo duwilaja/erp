@@ -1,0 +1,11 @@
+INSERT INTO `mydb`.`menu` (`id`, `urutan`, `menu`, `target`, `icon`, `type`, `induk_menu`, `akses`, `created_date`, `created_by`) VALUES (NULL, '2', 'My Ticket', 'oprations/my_ticket', 'far fa-circle nav-icon', '2', '12', '[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]', '2019-12-20', '0');
+
+INSERT INTO `mydb`.`menu` (`id`, `urutan`, `menu`, `target`, `icon`, `type`, `induk_menu`, `akses`, `created_date`, `created_by`) VALUES (NULL, '3', 'My Group', 'oprations/my_group', 'far fa-circle nav-icon', '2', '12', '[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]', '2019-12-20', '0');
+
+INSERT INTO `mydb`.`menu` (`id`, `urutan`, `menu`, `target`, `icon`, `type`, `induk_menu`, `akses`, `created_date`, `created_by`) VALUES (NULL, '4', 'Maintenance', 'oprations/maintenance', 'far fa-circle nav-icon', '2', '12', '[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]', '2019-12-20', '0');
+
+INSERT INTO `mydb`.`menu` (`id`, `urutan`, `menu`, `target`, `icon`, `type`, `induk_menu`, `akses`, `created_date`, `created_by`) VALUES (NULL, '5', 'Report Ticket', 'oprations/report', 'far fa-circle nav-icon', '2', '12', '[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]', '2019-12-20', '0');
+
+INSERT INTO `mydb`.`menu` (`id`, `urutan`, `menu`, `target`, `icon`, `type`, `induk_menu`, `akses`, `created_date`, `created_by`) VALUES (NULL, '6', 'Report Maintenance', 'oprations/report_maint', 'far fa-circle nav-icon', '2', '12', '[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]', '2019-12-20', '0');
+
+INSERT INTO `mydb`.`menu` (`id`, `urutan`, `menu`, `target`, `icon`, `type`, `induk_menu`, `akses`, `created_date`, `created_by`) VALUES (NULL, '6', 'Data Gaji Karyawan', 'payroll/data_gaji_karyawan', 'far fa-circle nav-icon', '2', '13', '[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]', '2019-12-20', '0');
