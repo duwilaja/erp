@@ -18,7 +18,7 @@ class ClickUp extends CI_Controller {
 		}
 		$r=$this->db->where(array("status"=>"new","grp"=>"oprlvl2"))->where_not_in("id",$lst)->get("tickets")->row();
 		$res="No data found";
-		if(count($r)>0){
+		if($r!=null){
 			$la="";
 			$r2=$this->db->where(array("id"=>$r->tic_layanan_id))->get("tic_layanan")->row();
 			if(count($r2)>0){
