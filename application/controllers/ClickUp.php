@@ -21,7 +21,7 @@ class ClickUp extends CI_Controller {
 		if($r!=null){
 			$la="";
 			$r2=$this->db->where(array("id"=>$r->tic_layanan_id))->get("tic_layanan")->row();
-			if(count($r2)>0){
+			if($r2!=null){
 				$la=$this->layanan($r2->layanan_id);
 			}
 			$data = '{
