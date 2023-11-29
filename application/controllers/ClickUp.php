@@ -49,7 +49,7 @@ class ClickUp extends CI_Controller {
 					},
 					{
 					  "id": "1305667d-8759-4f77-99e4-f1f8ae031a94",'. //ticketno
-					  '"value": "'.$r->id.'"
+					  '"value": "'.$r->ticketno.'"
 					}
 				  ]
 				}';
