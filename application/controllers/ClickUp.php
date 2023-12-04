@@ -19,14 +19,15 @@ class ClickUp extends CI_Controller {
 		$r=$this->db->select("tickets.*,tic_node.node")->from("tickets")->join("tic_node","tic_node.id=tickets.tic_node_id","left")->where(array("status"=>"new","grp"=>"oprlvl2"))->where_not_in("tickets.id",$lst)->get()->row();
 		$res="No data found";
 		if($r!=null){
-			$la=""; $node=(trim($r->node_id)=="")?$r->node:$r->node_id;
+			$la="51837652-2741-4ff9-93b8-90aa83f1d6d4"; $node=(trim($r->node_id)=="")?$r->node:$r->node_id;
+			$node=trim($node)==""||$node==null?"No Location":$node;
 			$r2=$this->db->where(array("id"=>$r->tic_layanan_id))->get("tic_layanan")->row();
 			if($r2!=null){
-				$la=$this->layanan($r2->layanan_id);
+				$la=$this->layanan($r2->layanan_id,$la);
 			}
 			$data = '{
-				  "name": "'.$node.'",
-				  "description": "'.$r->body.'",
+				  "name": "'.$this->cleanup($node).'",
+				  "description": "'.$this->cleanup($r->body).'",
 				  "status": "'.$r->status.'",
 				  "priority": 3,
 				  "due_date": '.strtotime('+24 hours').',
@@ -58,6 +59,14 @@ class ClickUp extends CI_Controller {
 		}
 		echo $res;
 	}
+	private function cleanup($s){
+		$r=str_ireplace('"','',$s);
+		$r=str_ireplace("'","",$r);
+		$r=str_ireplace("\n","",$r);
+		$r=str_ireplace("\r","",$r);
+		
+		return $r;
+	}
     //send to clickup
 	private function clickup($list_id,$token,$data,$tid){
 		
@@ -80,7 +89,7 @@ class ClickUp extends CI_Controller {
 		return $result;
 	}
 	
-	private function layanan($param){
+	private function layanan($param,$ret=""){
 		$lay='  {
                     "id": "58259a09-cfe5-4ac5-861b-3277d6489fe1",
                     "name": "Layanan",
@@ -189,7 +198,6 @@ class ClickUp extends CI_Controller {
                     "required": false
                 }';
 		$layanan=json_decode($lay);
-		$ret="";
 		foreach($layanan->type_config->options as $layan)
 		{
 			if($layan->color==$param) $ret=$layan->id;
