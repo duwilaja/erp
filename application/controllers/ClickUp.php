@@ -65,6 +65,7 @@ class ClickUp extends CI_Controller {
 		$r=str_ireplace("'","",$r);
 		$r=str_ireplace("\n","",$r);
 		$r=str_ireplace("\r","",$r);
+		$r=str_ireplace("\t","",$r);
 		
 		return $r;
 	}
