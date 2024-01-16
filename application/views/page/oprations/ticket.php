@@ -72,7 +72,7 @@
                                <option value="new">new</option>
                                <option value="pending">pending</option>
                                <option value="progress">progress</option>
-                               <option value="resolved">resolved</option>
+                               <option value="done">done</option>
                                <option value="closed">closed</option>
                            </select>
                        </div>
@@ -260,7 +260,7 @@
                                     <option value="new">new</option>
                                     <option value="pending">pending</option>
                                     <option value="progress">progress</option>
-                                    <option value="resolved">resolved</option>
+                                    <option value="done">done</option>
                                     <option value="closed">closed</option>
                                 </select>							
                             </div>
@@ -622,7 +622,7 @@
                                                 <option value="new">new</option>
                                                 <option value="pending">pending</option>
                                                 <option value="progress">progress</option>
-                                                <option value="resolved">resolved</option>
+                                                <option value="done">done</option>
                                                 <option value="closed">closed</option>
                                             </select>
                                         </div>
