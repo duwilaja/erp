@@ -223,12 +223,11 @@
                                 <label>Group</label>
                                 <select class="form-control form-control-sm" onchange="getiPIC(this);" name="i_grp" id="grp" aria-invalid="false" required>
                                     <option value=""></option>
-                                    <option value="oprlvl1">C3</option>
-                                    <option value="oprlvl1bali">C3 Bali</option>
+                                    <option value="oprlvl1">OPR Level 1</option>
                                     <option value="oprlvl2">OPR Level 2</option>
                                     <option value="oprlvl3">OPR Level 3</option>
-                                    <option value="oprlvl4">Level 4</option>
-                                    <option value="oprlvl5">Level 5</option>
+                                    <option value="oprlvl4">OPR Level 4</option>
+                                    <!--option value="oprlvl5">OPR Level 5</option-->
                                 </select>								
                             </div>
                         </div>
@@ -599,12 +598,11 @@
                                 <div class="mb-2">Select Group</div>
                                     <select class="form-control form-control-sm" onchange="getPIC('','',    this.value)" id="group" name="hgrp">
                                         <option value="">All Groups</option>
-                                        <option value="oprlvl1">C3</option>
-                                        <option value="oprlvl1bali">C3 Bali</option>
+                                        <option value="oprlvl1">OPR Level 1</option>
                                         <option value="oprlvl2">OPR Level 2</option>
                                         <option value="oprlvl3">OPR Level 3</option>
-                                        <option value="oprlvl4">Level 4</option>
-                                        <option value="oprlvl5">Level 5</option>
+                                        <option value="oprlvl4">OPR Level 4</option>
+                                        <!--option value="oprlvl5">OPR Level 5</option-->
                                     </select>
                                 </div>
                                 <div class="col-md-6">
