@@ -90,6 +90,25 @@ class ClickUp extends CI_Controller {
 		
 		return $result;
 	}
+	private function clickupdate($task_id,$token,$data){
+		$url = 'https://api.clickup.com/api/v2/list/'.$list_id.'/task';
+		//$postdata = json_encode($data);
+
+		$ch = curl_init($url); 
+		curl_setopt($ch, CURLOPT_POST, 1);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json','Authorization: '.$token));
+		$result = curl_exec($ch);
+		curl_close($ch);
+		
+		$jres=json_decode($result);
+		if(isset($jres->id)){
+			$this->db->insert("clickup",array("listid"=>$list_id,"ticketid"=>$tid,"clickupid"=>$jres->id));
+		}
+		
+		return $result;
+	}
 	
 	private function layanan($param,$ret=""){
 		$lay='  {
