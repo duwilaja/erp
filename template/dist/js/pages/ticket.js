@@ -482,10 +482,12 @@ function editTicket(id='') {
             
             $('select[name="subject"]').html('<option value=""></option> <option value="problem" '+cekSelected(res.subject,'problem')+'>Problem</option> <option value="change" '+cekSelected(res.subject,'change')+'>Change Request</option> <option value="information" '+cekSelected(res.subject,'information')+'>Information</option>');
             
-            $('select[name="grp"]').html('<option value=""></option> <option '+cekSelected(res.grp,'oprlvl1')+' value="oprlvl1">C3</option> <option '+cekSelected(res.grp,'oprlvl1bali')+' value="oprlvl1bali">C3 Bali</option> <option '+cekSelected(res.grp,'oprlvl2')+' value="oprlvl2">OPR Level 2</option> <option '+cekSelected(res.grp,'oprlvl3')+' value="oprlvl3">OPR Level 3</option> <option '+cekSelected(res.grp,'oprlvl4')+' value="oprlvl4">Level 4</option><option '+cekSelected(res.grp,'oprlvl5')+' value="oprlvl5">Level 5</option>');
-            
-            $('select[name="status"]').html('<option value=""></option> <option '+cekSelected(res.status,'new')+' value="new">new</option> <option '+cekSelected(res.status,'pending')+' value="pending">pending</option> <option '+cekSelected(res.status,'progress')+' value="progress">progress</option> <option '+cekSelected(res.status,'resolved')+' value="resolved">resolved</option> <option '+cekSelected(res.status,'closed')+' value="closed">closed</option>');
-
+            //$('select[name="grp"]').html('<option value=""></option> <option '+cekSelected(res.grp,'oprlvl1')+' value="oprlvl1">C3</option> <option '+cekSelected(res.grp,'oprlvl1bali')+' value="oprlvl1bali">C3 Bali</option> <option '+cekSelected(res.grp,'oprlvl2')+' value="oprlvl2">OPR Level 2</option> <option '+cekSelected(res.grp,'oprlvl3')+' value="oprlvl3">OPR Level 3</option> <option '+cekSelected(res.grp,'oprlvl4')+' value="oprlvl4">Level 4</option><option '+cekSelected(res.grp,'oprlvl5')+' value="oprlvl5">Level 5</option>');
+            $('select[name="grp"]').val(res.grp);
+			
+            //$('select[name="status"]').html('<option value=""></option> <option '+cekSelected(res.status,'new')+' value="new">new</option> <option '+cekSelected(res.status,'pending')+' value="pending">pending</option> <option '+cekSelected(res.status,'progress')+' value="progress">progress</option> <option '+cekSelected(res.status,'resolved')+' value="resolved">resolved</option> <option '+cekSelected(res.status,'closed')+' value="closed">closed</option>');
+			$('select[name="status"]').val(res.status);
+			
             $('select[name="sla"]').html('<option value=""></option> <option '+cekSelected(res.sla,'1')+' value="1">Critical</option> <option '+cekSelected(res.sla,'2')+' value="2">High</option> <option '+cekSelected(res.sla,'3')+' value="3">Medium</option> <option '+cekSelected(res.sla,'4')+' value="4">Low</option>');
 
             getPIC('',res.pic,res.grp);
@@ -552,8 +554,9 @@ function getTicket2(id) {
 
             $('input[name="h_ticket_id"]').val(id);
 
-            $('select[name="hgrp"]').html('<option value=""></option> <option '+cekSelected(res.grp,'oprlvl1')+' value="oprlvl1">C3</option> <option '+cekSelected(res.grp,'oprlvl1bali')+' value="oprlvl1bali">C3 Bali</option> <option '+cekSelected(res.grp,'oprlvl2')+' value="oprlvl2">OPR Level 2</option> <option '+cekSelected(res.grp,'oprlvl3')+' value="oprlvl3">OPR Level 3</option><option '+cekSelected(res.grp,'oprlvl4')+' value="oprlvl4">Level 4</option><option '+cekSelected(res.grp,'oprlvl5')+' value="oprlvl5">Level 5</option>');
-           
+            //$('select[name="hgrp"]').html('<option value=""></option> <option '+cekSelected(res.grp,'oprlvl1')+' value="oprlvl1">C3</option> <option '+cekSelected(res.grp,'oprlvl1bali')+' value="oprlvl1bali">C3 Bali</option> <option '+cekSelected(res.grp,'oprlvl2')+' value="oprlvl2">OPR Level 2</option> <option '+cekSelected(res.grp,'oprlvl3')+' value="oprlvl3">OPR Level 3</option><option '+cekSelected(res.grp,'oprlvl4')+' value="oprlvl4">Level 4</option><option '+cekSelected(res.grp,'oprlvl5')+' value="oprlvl5">Level 5</option>');
+            $('select[name="hgrp"]').val(res.grp);
+			
             $('.txtNoTicket').text(res.ticketno);
             $('.txtLayanan').text(res.layanan);
             $('.txtCustomer').text(res.customer);
