@@ -92,12 +92,11 @@
                        <div class="col-md-2">
                            <select class="form-control form-control-sm" id="group" name="grpf">
                                <option value="">All Groups</option>
-                               <option value="oprlvl1">C3</option>
-                               <option value="oprlvl1bali">C3 Bali</option>
+                               <option value="oprlvl1">OPR Level 1</option>
                                <option value="oprlvl2">OPR Level 2</option>
                                <option value="oprlvl3">OPR Level 3</option>
-                               <option value="oprlvl4">Level 4</option>
-                               <option value="oprlvl5">Level 5</option>
+                               <option value="oprlvl4">OPR Level 4</option>
+                               <!--option value="oprlvl5">OPR Level 5</option-->
                            </select>
                        </div>
                        <div class="col-md-2">
@@ -190,9 +189,9 @@
                                 <label>Layanan</label>
                                 <select class="form-control form-control-sm" name="i_layanan" onchange="get_node_cl('','i_node_id')">
                                     <option value=""></option>
-                                    <?php foreach (@$layanan as $v) { ?>
-                                    <option value="<?=$v->id;?>"><?=$v->layanan;?></option>
-                                    <?php } ?>
+                                    <!--?php foreach (@$layanan as $v) { ?>
+                                    <option value="< ?=$v->id;?>">< ?=$v->layanan;?></option>
+                                    < ?php } ?-->
                                 </select>
                             </div>
                         </div>
