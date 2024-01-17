@@ -8,6 +8,17 @@ class ClickUp extends CI_Controller {
         parent::__construct();
 	}
 	
+	public function oprupdstatus(){
+		$token='pk_60882308_DSF68Y6K5L6BY5WGZVR53OSVMURK75LL';
+		$r=$this->db->select("status,clickupid")->from("clickup")->join("tickets","tickets.ticketno=clickup.ticketid","left")->where(array("upd"=>1))->get()->row();
+		$res="No data found";
+		if($r!=null){
+			$data = '{"status": "'.$r->status.'"}';
+			echo $data;
+			$res = $this->clickupdate($r->clickupid,$token,$data);
+		}
+		echo $res;
+	}
 	public function oprlvl2(){
 		$list_id='901600280460';
 		$token='pk_60882308_DSF68Y6K5L6BY5WGZVR53OSVMURK75LL';
@@ -91,11 +102,11 @@ class ClickUp extends CI_Controller {
 		return $result;
 	}
 	private function clickupdate($task_id,$token,$data){
-		$url = 'https://api.clickup.com/api/v2/list/'.$list_id.'/task';
+		$url = 'https://api.clickup.com/api/v2/task/'.$task_id.'?custom_task_ids=true';
 		//$postdata = json_encode($data);
 
 		$ch = curl_init($url); 
-		curl_setopt($ch, CURLOPT_POST, 1);
+		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json','Authorization: '.$token));
@@ -104,7 +115,7 @@ class ClickUp extends CI_Controller {
 		
 		$jres=json_decode($result);
 		if(isset($jres->id)){
-			$this->db->insert("clickup",array("listid"=>$list_id,"ticketid"=>$tid,"clickupid"=>$jres->id));
+			$this->db->update("clickup",array("upd"=>0),array("clickupid"=>$task_id));
 		}
 		
 		return $result;
