@@ -578,8 +578,10 @@ function getTicket2(id) {
 
             $('select[name="h_status"]').val(res.status);
             get_sclosed(res.s_closed_id);
+			
+			var resfile=res.file==""?"":"Attachment";
 
-            $('.txtFile').html(`<a target="_blank" href="${url+'data/ticket/'+res.file}">${res.file}</a>`);
+            $('.txtFile').html(`<a target="_blank" href="${url+'data/ticket/'+res.file}">${resfile}</a>`);
             getHTicket();
 
            }, 300);
