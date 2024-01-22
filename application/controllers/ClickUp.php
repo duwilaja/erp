@@ -10,7 +10,7 @@ class ClickUp extends CI_Controller {
 	
 	public function oprupdstatus(){
 		$token='pk_60882308_DSF68Y6K5L6BY5WGZVR53OSVMURK75LL';
-		$r=$this->db->select("status,clickupid")->from("clickup")->join("tickets","tickets.ticketno=clickup.ticketid","left")->where(array("upd"=>1))->get()->row();
+		$r=$this->db->select("status,clickupid")->from("clickup")->join("tickets","tickets.id=clickup.ticketid","left")->where(array("upd"=>1))->get()->row();
 		$res="No data found";
 		if($r!=null){
 			$data = '{"status": "'.$r->status.'"}';
