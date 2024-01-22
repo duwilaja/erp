@@ -222,7 +222,17 @@ class ClickUp extends CI_Controller {
                                 "id": "2aef8996-8c25-4b3d-8f6e-fbbc41afbdf4",
                                 "label": "SMART CITY MEDAN",
                                 "color": "36"
-                            }
+                            },
+							{
+								"id": "49eafa76-e1a7-49d5-849b-21aefcd89ad1",
+								"label": "SMART CITY YOGYAKARTA",
+								"color": "38"
+							},
+							{
+								"id": "2f0d443e-78d5-4a28-b48d-03a24c66512c",
+								"label": "CALL CENTER",
+								"color": "37"
+							}
                         ]
                     },
                     "date_created": "1700381694312",
