@@ -109,7 +109,8 @@
                                 <td>NIK</td>
                                 <td>Karyawan</td>
                                 <td>Status</td>
-                                <td>Jam</td>
+                                <td>IN</td>
+                                <td>OUT</td>
                                 <td>Tanggal Absen</td>
                                 <td>#</td>
                             </tr>
