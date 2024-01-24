@@ -7,11 +7,16 @@
 
     var tgl_masuk = '<?php echo ($data["tgl_masuk"]); ?>';
     var tgl_keluar = '<?php echo ($data["tgl_keluar"]); ?>';
-
-    var ela = <?php echo ($data["end_latitude"]); ?>;
-    var elo = <?php echo ($data["end_longitude"]); ?>;
-    var eola = <?php echo ($data["end_office_latitude"]); ?>;
-    var eolo = <?php echo ($data["end_office_longitude"]); ?>;
+    var ela = "";
+    var elo = "";
+    var eola = "";
+    var eolo = ""
+    if (tgl_masuk != tgl_keluar) {
+        ela = <?php echo ($data["end_latitude"]); ?>;
+        elo = <?php echo ($data["end_longitude"]); ?>;
+        eola = <?php echo ($data["end_office_latitude"]); ?>;
+        eolo = <?php echo ($data["end_office_longitude"]); ?>;
+    }
 </script>
 <div class="card">
     <div class="card-header card-black">
