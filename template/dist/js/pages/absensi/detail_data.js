@@ -18,8 +18,8 @@ async function GMPStart() {
     addMarker(la, lo, "My Start Position", my_marker);
     addMarker(ola, olo, "Start Office Position");
     if (tgl_masuk != tgl_keluar) {
-        addMarker(ela, elo, "My End Position", my_marker);
-        addMarker(eola, eolo, "End Office Position");
+        addMarker(parseFloat(ela), parseFloat(elo), "My End Position", my_marker);
+        addMarker(parseFloat(eola), parseFloat(eolo), "End Office Position");
     }
 
 

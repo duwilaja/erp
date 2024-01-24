@@ -12,10 +12,10 @@
     var eola = "";
     var eolo = ""
     if (tgl_masuk != tgl_keluar) {
-        ela = <?php echo ($data["end_latitude"]); ?>;
-        elo = <?php echo ($data["end_longitude"]); ?>;
-        eola = <?php echo ($data["end_office_latitude"]); ?>;
-        eolo = <?php echo ($data["end_office_longitude"]); ?>;
+        ela = '<?php echo ($data["end_latitude"]); ?>';
+        elo = '<?php echo ($data["end_longitude"]); ?>';
+        eola = '<?php echo ($data["end_office_latitude"]); ?>';
+        eolo = '<?php echo ($data["end_office_longitude"]); ?>';
     }
 </script>
 <div class="card">
