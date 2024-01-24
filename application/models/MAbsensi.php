@@ -14,7 +14,9 @@ class MAbsensi extends CI_Model {
         $this->jam_telat = $this->db->get('setting_absen')->last_row()->jam_telat;
     }
     
-    
+    public function getDetail($id){
+        return $this->db->query("select a.*,DATE_FORMAT(DATE_ADD(a.start_date,INTERVAL 7 HOUR),'%Y-%m-%d %H:%i') tgl_masuk,DATE_FORMAT(DATE_ADD(a.end_date,INTERVAL 7 HOUR),'%Y-%m-%d %H:%i') tgl_keluar,DATE_FORMAT(DATE_ADD(a.start_office_date,INTERVAL 7 HOUR),'%H:%i') office_masuk,DATE_FORMAT(DATE_ADD(a.end_office_date,INTERVAL 7 HOUR),'%H:%i') office_keluar from absensi a_erp left join absensis a on a_erp.absensis_id=a.id");
+    }
     public function get($id='',$where='',$query='',$limit='',$start='')
     {
         $q = false;
@@ -58,7 +60,7 @@ class MAbsensi extends CI_Model {
         // Set searchable column fields
         $CI->dt->column_search = ['k.nip','k.nama','jam_masuk','jam_keluar','tanggal'];
         // Set select column fields
-        $CI->dt->select = 'ab.id,k.nip,k.nama,jam_masuk,ab.status,jam_keluar,tanggal';
+        $CI->dt->select = 'ab.id,k.nip,k.nama,jam_masuk,ab.status,jam_keluar,tanggal,absensis_id';
         // Set default order
         $CI->dt->order = ['date(ab.tanggal),jam_masuk' => 'desc'];
         
@@ -113,6 +115,10 @@ class MAbsensi extends CI_Model {
 
         $i = $_POST['start'];
         foreach ($dataTabel as $dt) {
+            $d = '';
+            if($dt->absensis_id){
+                $d = '<a  class="text-warning" href="'.site_url('absensi/detail_data/').$dt->id.'"><i class="fa fa-list"></i></a>';
+            }
             $i++;
             $data[] = array(
                 $i,
@@ -121,6 +127,7 @@ class MAbsensi extends CI_Model {
                 $this->setStatus($dt->status),
                 $this->setJam($dt->tanggal,$dt->status),
                 $this->bantuan->tgl_indo($dt->tanggal),
+                $d
             );
         }
         
@@ -211,6 +218,7 @@ class MAbsensi extends CI_Model {
                 $this->setStatus($dt->status),
                 $this->setJam($dt->tanggal,$dt->status),
                 $this->bantuan->tgl_indo($dt->tanggal),
+                '<a  class="text-warning" href="'.site_url('absensi/detail_data/').$dt->id.'"><i class="fa fa-list"></i></a>',
             );
         }
         

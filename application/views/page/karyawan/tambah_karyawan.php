@@ -2,6 +2,10 @@
     <div class="card-header card-black">
         <h3 class="card-title"><?=$titleForm;?></h3>
     </div>
+    <script>
+        let cok = <?php echo json_encode($val); ?>;
+        let listOfficeType = <?php echo json_encode($office_staff); ?>;
+    </script>
     <form role="form" method="POST" action="<?=site_url('Karyawan/'.$action);?>">
         <!-- /.card-header -->
         <div class="card-body">
@@ -9,8 +13,15 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label>NIP</label>
-                        <input type="text" class="form-control" name="nip" placeholder="ex : 00001" value="<?=$val['nip']?>">
-                        <input type="hidden" class="form-control" name="id" value="<?=$val['karyawan_id']?>">
+                        <?php if($val['karyawan_id']!=""){ ?>
+                        <br/><label><?=$val['nip']?></label>
+                        <input type="hidden" class="form-control" name="nip" placeholder="ex : 00001" value="<?=$val['nip']?>">
+                        <?php }else { ?>
+                        <input type="text" class="form-control"  name="nip" placeholder="ex : 00001" value="<?=$val['nip']?>">
+                        <?php } ?>
+                        <input type="hidden" class="form-control" id="k_id" name="id" value="<?=$val['karyawan_id']?>">
+                        <input type="hidden" class="form-control" id="staff_code" name="staff_code" value="<?=$val['staff_code']?>">
+                        <input type="hidden" class="form-control" id="select_office_id" value="<?=$val['office_id']?>">
                     </div>
                 </div>
                 <div class="col-sm-6">
@@ -79,6 +90,49 @@
                     <div class="form-group">
                         <label>Grade</label>
                         <input type="text" class="form-control" name="grade" value="<?=@$val['grade']?>">
+                    </div>
+                </div>
+                
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>Office</label>
+                        <select class="form-control" name="office_id" id="office_id">
+                            <option value="">- Choose Office -</option>
+                            <?php foreach ($office as $v) { ?>
+                                <option value="<?=$v->id?>" <?=$val['office_id'] == $v->id ? 'selected' : '';?>><?=$v->description;?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>Staff Type</label>
+                        <select class="form-control" name="office_staff_id" id="office_staff_id">
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>Geofence Status</label>
+                        <div style="display: flex;">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" value="1" name="geofence_status" <?=$val['geofence_status'] == 1 ? 'checked' : ''?>>
+                                <label class="form-check-label">On</label>
+                            </div>
+                            <div class="form-check ml-2">
+                                <input class="form-check-input" type="radio" value="0" name="geofence_status" <?=$val['geofence_status'] == 0 ? 'checked' : ''?>>
+                                <label class="form-check-label">Off</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>Device ID</label>
+                        <input type="text" class="form-control" name="device_id" value="<?=@$val['device_id']?>">
                     </div>
                 </div>
 

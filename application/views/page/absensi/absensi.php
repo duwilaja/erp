@@ -111,6 +111,7 @@
                                 <td>Status</td>
                                 <td>Jam</td>
                                 <td>Tanggal Absen</td>
+                                <td>#</td>
                             </tr>
                         </thead>
                         <tbody>
