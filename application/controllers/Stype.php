@@ -2,13 +2,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Office extends MY_controller {
+class Stype extends MY_controller {
 
 	
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('MOffice','mc');
+		$this->load->model('MStype','mc');
 	}
 
 
@@ -18,22 +18,7 @@ class Office extends MY_controller {
 	}
 	
     
-    public function list_office()
-	{
-		$d = [
-			'title' => 'List Office',
-			'linkView' => 'page/office/list_office',
-			'fileScript' => 'office/office.js',
-			'bread' => [
-				'nama' => 'List Office',
-				'data' => [
-					['nama' => 'List Office','link' => site_url('office/list_office'),'active' => 'active'],
-				]
-			],
-		];
-		$this->load->view('_main',$d);
-	}
-	public function list_stype()
+    public function list_stype()
 	{
 		$d = [
 			'title' => 'List Staff Type',

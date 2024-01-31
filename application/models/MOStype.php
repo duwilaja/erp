@@ -1,9 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class MOffice extends CI_Model {
+class MOStype extends CI_Model {
 
-    private $t = 'offices';
+    private $t = 'office_staff_types';
     public $see = '*';
     private $id = 'id';
 
@@ -66,14 +66,17 @@ class MOffice extends CI_Model {
         // Set table name
         $CI->dt->table = $this->t;
         // Set orderable column fields
-        $CI->dt->column_order = [null, 'name'];
+        $CI->dt->column_order = ['o.name', 'staff_code','start_date','end_date'];
         // Set searchable column fields
-        $CI->dt->column_search = ['name', 'alamat'];
+        $CI->dt->column_search = ['o.name', 'staff_code'];
         // Set select column fields
-        $CI->dt->select = 'id,name,description, alamat, range_geofence';
+        $CI->dt->select = 'o.name,staff_code,start_date,end_date,'.$this->t.'.id';
         // Set default order
         $CI->dt->order = [$this->t . '.id' => 'desc'];
        
+	   $condition = [
+            ['join','offices o','o.id = '.$this->t.'.office_id','inner'],
+        ];
 
         $dataTabel = $this->dt->getRows($_POST, $condition);
         $del = "'Apakah anda yakin ingin menghapus data ini ?'";
@@ -81,11 +84,10 @@ class MOffice extends CI_Model {
         foreach ($dataTabel as $dt) {
             $i++;
             $data[] = array(
-                $dt->id,
                 $dt->name,
-                $dt->description,
-                $dt->alamat,
-                $dt->range_geofence,
+                $dt->staff_code,
+                $dt->start_date,
+                $dt->end_date,
                 ' <a href="#" data-toggle="modal" data-target="#exampleModal" onclick="det('.$dt->id.')" class="btn btn-default btn-sm"><i class="far fa-edit"></i></a> <a href="#" class="btn btn-primary btn-sm" onclick="de('.$dt->id.')"><i class="far fa-trash-alt"></i></a>'
             );
         }

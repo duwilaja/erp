@@ -20,9 +20,9 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title" style="position: relative;top: 10px;">List Office <span id="txtLE"></span></h3>
+                    <h3 class="card-title" style="position: relative;top: 10px;">List Office Type <span id="txtLE"></span></h3>
                     <div class="azsa" style="float: right;">
-                        <a href="#" data-toggle="modal" data-target="#exampleModal" class="btn btn-outline-danger" onclick="nyu();">Add Office</a>
+                        <a href="#" data-toggle="modal" data-target="#exampleModal" class="btn btn-outline-danger" onclick="nyu();">Add Type</a>
                     </div>
                 </div>
                 <!-- /.card-header -->
@@ -30,11 +30,10 @@
                     <table id="tabel" class="table">
                         <thead>
                             <tr>
-                                <td>ID</td>
-                                <td>Name</td>
-                                <td>Desc</td>
-                                <td>Address</td>
-                                <td>Radius</td>
+                                <td>Office</td>
+                                <td>Type</td>
+                                <td>In</td>
+                                <td>Out</td>
                                 <td>Action</td>
                             </tr>
                         </thead>
@@ -53,10 +52,10 @@
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Office</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Office Type</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -64,53 +63,51 @@
             <div class="modal-body">
                 <form action="javascript:void(0)" method="post" id="exampleForm">
                     <div class="row">
-                        <div class="col-md-2">
-                            <label>Name</label>
-                        </div>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" name="name">
+                            <label>Office</label>
                         </div>
-                        <div class="col-md-2">
-                            <label>Desc</label>
-                        </div>
-                        <div class="col-md-4">
-                            <input type="text" class="form-control" name="description">
+                        <div class="col-md-8">
+                            <select class="form-control" name="office_id">
+								<option value="0">--- please select --- </option>
+								<?php  foreach($offices as $o){?>
+									<option value="<?= $o->id;?>"><?= $o->name; ?></option>
+								<?php }?>
+							</select>
+							<!--input type="text" class="form-control" name="office_id"-->
                         </div>
 					</div>
 					<div class="row">
-                        <div class="col-md-2">
-                            <label>Latitude</label>
-                        </div>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" name="latitude" id="lat">
+                            <label>Type</label>
                         </div>
-                        <div class="col-md-2">
-                            <label>Longitude</label>
+                        <div class="col-md-8">
+							<select class="form-control" name="staff_code">
+								<option value="0">--- please select --- </option>
+								<?php  foreach($types as $o){?>
+									<option value="<?= $o->code;?>"><?= $o->name; ?></option>
+								<?php }?>
+							</select>
+                            <!--input type="text" class="form-control" name="staff_code"-->
                         </div>
+					</div>
+                    <div class="row">
                         <div class="col-md-4">
-                            <input type="text" class="form-control" name="longitude" id="lng">
+                            <label>In</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" name="start_date">
+                        </div>
+					</div>
+					<div class="row">
+                        <div class="col-md-4">
+                            <label>Out</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" name="end_date">
                         </div>
 					</div>
                     <div class="form-row">
-                        <div class="col-md-2">
-                            <label>Address</label>
-                        </div>
-                        <div class="col-md-4">
-                            <input type="text" class="form-control" name="alamat">
-                        </div>
-                        <div class="col-md-2">
-                            <label>Radius</label>
-                        </div>
-                        <div class="col-md-4">
-                            <input type="text" class="form-control" name="range_geofence">
-                        </div>
-					</div>
-                    <div class="form-row">
-						<div class="col-md-6">
-						<br />
-                            <input type="button" class="btn btn-outline-info" value="Map" onclick="mappicker('#lat','#lng');" style="width:100%">
-                        </div>
-                        <div class="col-md-6">
+                        <div class="col-md-12">
 						<br />
                             <input type="hidden" name="id" value="0">
                             <input type="submit" class="btn btn-outline-danger" value="Save" style="width:100%">
