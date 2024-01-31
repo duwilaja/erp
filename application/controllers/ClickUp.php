@@ -27,8 +27,14 @@ class ClickUp extends CI_Controller {
 		foreach($r as $x){
 			$lst[]=$x->ticketid;
 		}
+		//normal
 		$whin=array("new","progress","resolve","done");
 		$r=$this->db->select("tickets.*,tic_node.node")->from("tickets")->join("tic_node","tic_node.id=tickets.tic_node_id","left")->where(array("pic"=>62))->where_in("status",$whin)->where_not_in("tickets.id",$lst)->get()->row();
+		
+		//closed only
+		//$whr="status='closed' and year(dtm)=2024";
+		//$r=$this->db->select("tickets.*,tic_node.node")->from("tickets")->join("tic_node","tic_node.id=tickets.tic_node_id","left")->where($whr)->where_not_in("tickets.id",$lst)->get()->row();
+		
 		$res="No data found";
 		if($r!=null){
 			$la="51837652-2741-4ff9-93b8-90aa83f1d6d4"; $node=(trim($r->node_id)=="")?$r->node:$r->node_id;

@@ -1,9 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class MOffice extends CI_Model {
+class MStype extends CI_Model {
 
-    private $t = 'offices';
+    private $t = 'staff_types';
     public $see = '*';
     private $id = 'id';
 
@@ -66,11 +66,11 @@ class MOffice extends CI_Model {
         // Set table name
         $CI->dt->table = $this->t;
         // Set orderable column fields
-        $CI->dt->column_order = [null, 'name'];
+        $CI->dt->column_order = ['code', 'name'];
         // Set searchable column fields
-        $CI->dt->column_search = ['name', 'alamat'];
+        $CI->dt->column_search = ['name', 'code'];
         // Set select column fields
-        $CI->dt->select = 'id,name,description, alamat, range_geofence';
+        $CI->dt->select = 'code,name,id';
         // Set default order
         $CI->dt->order = [$this->t . '.id' => 'desc'];
        
@@ -81,11 +81,8 @@ class MOffice extends CI_Model {
         foreach ($dataTabel as $dt) {
             $i++;
             $data[] = array(
-                $dt->id,
+                $dt->code,
                 $dt->name,
-                $dt->description,
-                $dt->alamat,
-                $dt->range_geofence,
                 ' <a href="#" data-toggle="modal" data-target="#exampleModal" onclick="det('.$dt->id.')" class="btn btn-default btn-sm"><i class="far fa-edit"></i></a> <a href="#" class="btn btn-primary btn-sm" onclick="de('.$dt->id.')"><i class="far fa-trash-alt"></i></a>'
             );
         }

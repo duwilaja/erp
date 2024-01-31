@@ -2,13 +2,15 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Office extends MY_controller {
+class Officestype extends MY_controller {
 
 	
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('MOffice','mc');
+		$this->load->model('MOStype','mc');
+		$this->load->model('MOffice','mo');
+		$this->load->model('MStype','ms');
 	}
 
 
@@ -18,31 +20,18 @@ class Office extends MY_controller {
 	}
 	
     
-    public function list_office()
+    public function ls()
 	{
 		$d = [
-			'title' => 'List Office',
-			'linkView' => 'page/office/list_office',
+			'title' => 'List Office Type',
+			'offices' => $this->mo->get()->result(),
+			'types' => $this->ms->get()->result(),
+			'linkView' => 'page/office/list_os',
 			'fileScript' => 'office/office.js',
 			'bread' => [
-				'nama' => 'List Office',
+				'nama' => 'List Office Type',
 				'data' => [
-					['nama' => 'List Office','link' => site_url('office/list_office'),'active' => 'active'],
-				]
-			],
-		];
-		$this->load->view('_main',$d);
-	}
-	public function list_stype()
-	{
-		$d = [
-			'title' => 'List Staff Type',
-			'linkView' => 'page/office/list_stype',
-			'fileScript' => 'office/office.js',
-			'bread' => [
-				'nama' => 'List Staff Type',
-				'data' => [
-					['nama' => 'List Staff Type','link' => site_url('office/list_stype'),'active' => 'active'],
+					['nama' => 'List Office Staff','link' => site_url('office/list_stype'),'active' => 'active'],
 				]
 			],
 		];
