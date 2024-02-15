@@ -17,7 +17,7 @@ class MAbsensi extends CI_Model
 
     public function getDetail($id)
     {
-        return $this->db->query("select a.*,DATE_FORMAT(DATE_ADD(a.start_date,INTERVAL 7 HOUR),'%Y-%m-%d %H:%i') tgl_masuk,DATE_FORMAT(DATE_ADD(a.end_date,INTERVAL 7 HOUR),'%Y-%m-%d %H:%i') tgl_keluar,DATE_FORMAT(DATE_ADD(a.start_office_date,INTERVAL 7 HOUR),'%H:%i') office_masuk,DATE_FORMAT(DATE_ADD(a.end_office_date,INTERVAL 7 HOUR),'%H:%i') office_keluar from absensi a_erp left join absensis a on a_erp.absensis_id=a.id");
+        return $this->db->query("select a.*,DATE_FORMAT(DATE_ADD(a.start_date,INTERVAL 7 HOUR),'%Y-%m-%d %H:%i') tgl_masuk,DATE_FORMAT(DATE_ADD(a.end_date,INTERVAL 7 HOUR),'%Y-%m-%d %H:%i') tgl_keluar,DATE_FORMAT(DATE_ADD(a.start_office_date,INTERVAL 7 HOUR),'%H:%i') office_masuk,DATE_FORMAT(DATE_ADD(a.end_office_date,INTERVAL 7 HOUR),'%H:%i') office_keluar,a.reason_in,a.reason_out from absensi a_erp left join absensis a on a_erp.absensis_id=a.id");
     }
     public function get($id = '', $where = '', $query = '', $limit = '', $start = '')
     {
@@ -62,11 +62,13 @@ class MAbsensi extends CI_Model
         // Set searchable column fields
         $CI->dt->column_search = ['k.nip', 'k.nama', 'jam_masuk', 'jam_keluar', 'tanggal'];
         // Set select column fields
-        $CI->dt->select = "ab.id,k.nip,k.nama,jam_masuk,ab.status,jam_keluar,tanggal,ab.absensis_id,(select (CASE WHEN start_date = end_date THEN '-' ELSE DATE_ADD(end_date,INTERVAL 7 HOUR) END) from absensis abs where abs.id=ab.absensis_id) pulang";
+        $CI->dt->select = "ab.id,k.nip,k.nama,jam_masuk,ab.status,jam_keluar,tanggal,ab.absensis_id,(select (CASE WHEN start_date = end_date THEN '-' ELSE DATE_ADD(end_date,INTERVAL 7 HOUR) END) from absensis abs where abs.id=ab.absensis_id) pulang,absis.reason_in,absis.reason_out";
         // Set default order
         $CI->dt->order = ['date(ab.tanggal),jam_masuk' => 'desc'];
 
         $con = ['join', 'karyawan k', 'k.id = ab.karyawan_id', 'inner'];
+        array_push($condition, $con);
+        $con = ['join', 'absensis absis', 'absis.id = ab.absensis_id', 'left'];
         array_push($condition, $con);
 
         $con2 = ['where', 'ab.aktif', 1];
@@ -141,7 +143,9 @@ class MAbsensi extends CI_Model
                 $dt->nama,
                 $this->setStatus($status),
                 $jamMasuk,
+                $dt->reason_in,
                 $jamPulang,
+                $dt->reason_out,
                 $this->bantuan->tgl_indo($dt->tanggal),
                 $d
             );
@@ -174,11 +178,14 @@ class MAbsensi extends CI_Model
         // Set searchable column fields
         $CI->dt->column_search = ['k.nip', 'k.nama', 'jam_masuk', 'jam_keluar', 'tanggal'];
         // Set select column fields
-        $CI->dt->select = "ab.id,k.nip,k.nama,jam_masuk,ab.status,jam_keluar,tanggal,absensis_id,(select (CASE WHEN start_date = end_date THEN '-' ELSE DATE_ADD(end_date,INTERVAL 7 HOUR) END) from absensis abs where abs.id=ab.absensis_id) pulang";
+        $CI->dt->select = "ab.id,k.nip,k.nama,jam_masuk,ab.status,jam_keluar,tanggal,absensis_id,(select (CASE WHEN start_date = end_date THEN '-' ELSE DATE_ADD(end_date,INTERVAL 7 HOUR) END) from absensis abs where abs.id=ab.absensis_id) pulang,absis.reason_in,absis.reason_out";
         // Set default order
         $CI->dt->order = ['date(ab.tanggal),jam_masuk' => 'desc'];
 
         $con = ['join', 'karyawan k', 'k.id = ab.karyawan_id', 'inner'];
+        array_push($condition, $con);
+
+        $con = ['join', 'absensis absis', 'absis.id = ab.absensis_id', 'left'];
         array_push($condition, $con);
 
         if ($parent == 1) {
@@ -249,7 +256,9 @@ class MAbsensi extends CI_Model
                 $dt->nama,
                 $this->setStatus($status),
                 $jamMasuk,
+                $dt->reason_in,
                 $jamPulang,
+                $dt->reason_out,
                 $this->bantuan->tgl_indo($dt->tanggal),
                 $d
             );

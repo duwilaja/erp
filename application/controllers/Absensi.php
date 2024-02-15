@@ -177,7 +177,7 @@ class Absensi extends MY_controller
 		$dataAbsensi = $this->ma->getDetail($id);
 		$count = $dataAbsensi->num_rows();
 		$data = [];
-		print_r($count);
+		// print_r($count);
 		if ($count >= 1) {
 			foreach ($dataAbsensi->result_array() as $row) {
 				$data = $row;

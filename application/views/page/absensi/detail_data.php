@@ -160,6 +160,32 @@
             <div class="col-sm-6">
                 <div class="row">
                     <div class="col-sm-6">
+                        <span>Reason In</span>
+                    </div>
+                    <div class="col-sm-6">
+                        <span>
+                            <?= $data["reason_in"] ?>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <span>Reason Out</span>
+                    </div>
+                    <div class="col-sm-6">
+                        <span>
+                            <?= $data["reason_out"] ?>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-sm-6">
                         <span>Start</span>
                     </div>
                     <div class="col-sm-6 center">
