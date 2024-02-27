@@ -55,7 +55,7 @@
 <script src="<?= base_url('template/');?>plugins/datatables-buttons/js/buttons.html5.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
 
-<script>
+<script>/*
 const socket = io.connect('https://erp.matrik.co.id:3003/');
 console.log(Notification.permission);
    if (Notification.permission === "granted") {
@@ -93,7 +93,7 @@ var options = {
 
 $("#easyNotifys").easyNotify(options);
 
-});
+});*/
 </script>
 
 <?php if ($this->session->flashdata('success')) { ?> 
