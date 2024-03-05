@@ -114,7 +114,7 @@
         }
     </style>
     
-    <body style="background-color: #1D0D50;">
+    <body style="background-color: #FAFAFA;">
         
         
         <div class="main-content">
@@ -142,15 +142,15 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-12 col-md-10" style="margin-top: -38px;">
                         <div class="card bg-secondary shadow border-0" >
-                            <div class="card-body px-lg-5 py-lg-5" style="background: rgb(24,11,103); background: linear-gradient(90deg, rgba(24,11,103,1) 0%, rgba(45,21,142,1) 35%, rgba(53,26,163,1) 100%);">
+                            <div class="card-body px-lg-5 py-lg-5" style="background-color: #fff;">
                                 <div class="row" style="padding-top: 50px;">
                                     <div class="col-md-6 text-center">
-                                        <img style="margin-top: 20px;" src="<?=base_url('template/')?>logo/cctv.png" width="100%" alt="">
+                                        <img style="margin-top: 20px; margin-left: 40px;" src="<?=base_url('template/')?>plugins/login/welcome.png" width="100%" alt="">
                                     </div>
                                     <div class="col-md-4 col-sm-12 col-12 offset-md-1">
                                         <div class="text-center text-muted mb-4">
-                                            <img src="<?=base_url('template/')?>logo/korlantas.png" width="80px" alt="">
-                                            <h4 style="color: white;">Application System</h4>
+                                            <img src="<?=base_url('template/')?>plugins/login/matrik.png" width="80px" alt="">
+                                            <h4>Application System</h4>
                                             <br>
                                         </div>
                                         <form action="<?=site_url('auth/proses_login')?>" method="POST">
@@ -177,7 +177,7 @@
                                                 </label>
                                             </div>
                                             <div class="text-center">
-                                                <button type="submit" class="btn my-4" style="width: 100%; background-color: #1D0D50; color:#FFF;">Sign in</button>
+                                                <button type="submit" class="btn my-4" style="width: 100%; background-color: #e30613; color:#FFF;">Sign in</button>
                                             </div>
                                             
                                             <div class="sdas" style="text-align:center;">
