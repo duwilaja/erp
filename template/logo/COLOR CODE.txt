@@ -1,0 +1,6 @@
+==== WARNA LOGIN ===
+
+WARNA BACKGROUND	: #1D0D50
+WARNA CARD 			: background: rgb(24,11,103);
+					  background: linear-gradient(90deg, rgba(24,11,103,1) 0%, rgba(45,21,142,1) 35%, rgba(53,26,163,1) 100%);
+WARNA BUTTTON LOGIN : #1D0D50

@@ -32,7 +32,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <!-- Brand Logo -->
   <a href="#" class="brand-link text-center bg-white">
-    <img src="<?= base_url('template/logo/logo.png');?>" alt="Matrik Logo" class=""
+    <img src="<?= base_url('template/logo/korlantas.png');?>" alt="Logo" class=""
     style="opacity: .8; height: 40px;">
   </a>
   
