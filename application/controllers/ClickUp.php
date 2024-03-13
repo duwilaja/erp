@@ -53,7 +53,7 @@ class ClickUp extends CI_Controller {
 				  "time_estimate": 8640000,
 				  "start_date": '.strtotime('now').',
 				  "start_date_time": false,
-				  "assignees": 60898731,
+				  "assignees": [60898731],
 				  "custom_fields": [
 					{
 					  "id": "e8b83914-ea5e-4792-9492-437b7c9dd3a7",'. //kategori
