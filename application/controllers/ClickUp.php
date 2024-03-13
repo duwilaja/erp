@@ -53,10 +53,15 @@ class ClickUp extends CI_Controller {
 				  "time_estimate": 8640000,
 				  "start_date": '.strtotime('now').',
 				  "start_date_time": false,
+				  "assignees": 60898731,
 				  "custom_fields": [
 					{
 					  "id": "e8b83914-ea5e-4792-9492-437b7c9dd3a7",'. //kategori
 					  '"value": ["'.$this->kategori($r->tic_ktg_id).'"]
+					},
+					{
+					  "id": "8d73abef-b040-4a87-ac7a-b9b135cf1976",'. //subkategori
+					  '"value": ["'.$this->subkategori($r->tic_subject_id).'"]
 					},
 					{
 					  "id": "58259a09-cfe5-4ac5-861b-3277d6489fe1",'. //layanan
@@ -520,5 +525,181 @@ class ClickUp extends CI_Controller {
 		}
 		
 		return $ret;                
+	}
+	
+	private function subkategori($param){
+          $kat='{
+				  "id": "8d73abef-b040-4a87-ac7a-b9b135cf1976",
+				  "name": "Sub Kategori",
+				  "type": "drop_down",
+				  "type_config": {
+					"default": 0,
+					"placeholder": null,
+					"options": [
+					  {
+						"id": "cc7454a1-9237-4611-9bee-0e064434448c",
+						"name": "Relokasi",
+						"color": 4,
+						"orderindex": 0
+					  },
+					  {
+						"id": "cea4f42c-6564-4264-926b-c74e61ac839e",
+						"name": "Change IP",
+						"color": 5,
+						"orderindex": 1
+					  },
+					  {
+						"id": "32ff3ca8-d804-4761-8fc3-c8781132a07e",
+						"name": "Change SSID",
+						"color": 6,
+						"orderindex": 2
+					  },
+					  {
+						"id": "5d3d8653-5a6c-4a66-93af-b2ec021208d2",
+						"name": "Bypass Macc Address",
+						"color": 7,
+						"orderindex": 3
+					  },
+					  {
+						"id": "ad0a1c34-4527-47af-bb76-4909f72b5e06",
+						"name": "Link Problem",
+						"color": 8,
+						"orderindex": 4
+					  },
+					  {
+						"id": "2fc6127f-5493-4c4f-809d-2e558cdfbb0c",
+						"name": "Device Problem",
+						"color": 9,
+						"orderindex": 5
+					  },
+					  {
+						"id": "2010f366-6090-4116-a14b-b803cb743d99",
+						"name": "Config Problem",
+						"color": 11,
+						"orderindex": 6
+					  },
+					  {
+						"id": "5f9e5083-9f5e-4902-b8da-9f840f579f69",
+						"name": "Firmware Problem",
+						"color": 12,
+						"orderindex": 7
+					  },
+					  {
+						"id": "cd6710e1-ac48-407e-93e8-e832beafe01e",
+						"name": "Kontrak Habis",
+						"color": 13,
+						"orderindex": 8
+					  },
+					  {
+						"id": "f5c66a70-e5bd-4685-93ff-e00b54b5f033",
+						"name": "Rollback",
+						"color": 14,
+						"orderindex": 9
+					  },
+					  {
+						"id": "dd0eb143-6d3e-43d9-aaf3-0f0993a8ded1",
+						"name": "Intermitten",
+						"color": 15,
+						"orderindex": 10
+					  },
+					  {
+						"id": "d474b9a5-008d-47b1-83eb-0f8d3b52feb5",
+						"name": "Change config",
+						"color": 16,
+						"orderindex": 11
+					  },
+					  {
+						"id": "5b7c9bfb-0d53-4615-8400-a1003fe2b489",
+						"name": "Add IP",
+						"color": 17,
+						"orderindex": 12
+					  },
+					  {
+						"id": "5aa0b2bd-ca34-464d-a785-a11c5e895446",
+						"name": "Cable Problem",
+						"color": 18,
+						"orderindex": 13
+					  },
+					  {
+						"id": "8a276eab-0c0f-4cc8-9730-ed111e838076",
+						"name": "Add User",
+						"color": 19,
+						"orderindex": 14
+					  },
+					  {
+						"id": "8372e04d-27df-4ab6-9943-4ee8551843cf",
+						"name": "License Issue",
+						"color": 20,
+						"orderindex": 15
+					  },
+					  {
+						"id": "e04f2c0e-f623-4206-855b-7cb95bdc9a44",
+						"name": "Other Problem",
+						"color": 21,
+						"orderindex": 16
+					  },
+					  {
+						"id": "9bf6d91a-fc07-4665-8f99-9f8f9e72d322",
+						"name": "Informasi",
+						"color": 22,
+						"orderindex": 17
+					  },
+					  {
+						"id": "cd81c040-e398-4ead-bea0-38dd57db629c",
+						"name": "Report",
+						"color": 23,
+						"orderindex": 18
+					  },
+					  {
+						"id": "075ed3b0-de38-44c2-9090-7e0ca1a04a3f",
+						"name": "Report Data",
+						"color": 24,
+						"orderindex": 19
+					  },
+					  {
+						"id": "0649c089-bf6b-4db4-ab4d-c35b72cc58ce",
+						"name": "Sim Card Problem",
+						"color": 25,
+						"orderindex": 20
+					  },
+					  {
+						"id": "f40436ad-220f-475c-9ba5-10f8b3039349",
+						"name": "Device User Problem",
+						"color": 26,
+						"orderindex": 21
+					  },
+					  {
+						"id": "b3ae7317-473f-43e7-83a7-212ed59c24da",
+						"name": "Electrical Problem",
+						"color": 27,
+						"orderindex": 22
+					  },
+					  {
+						"id": "d4685f39-0b1d-4ec3-9fed-14930ce70472",
+						"name": "Delete Data",
+						"color": 28,
+						"orderindex": 23
+					  },
+					  {
+						"id": "8013c7d2-4990-4e30-a7e5-aeb060506185",
+						"name": "Bug Aplikasi",
+						"color": 29,
+						"orderindex": 24
+					  }
+					]
+				  },
+				  "date_created": "1700381832528",
+				  "hide_from_guests": false,
+				  "required": false
+				}';
+				
+		$kategori=json_decode($kat);
+		$ret="";
+		foreach($kategori->type_config->options as $kate)
+		{
+			if($kate->color==$param) $ret=$kate->id;
+		}
+		
+		return $ret;
 	}
 }
