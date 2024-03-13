@@ -61,7 +61,7 @@ class ClickUp extends CI_Controller {
 					},
 					{
 					  "id": "8d73abef-b040-4a87-ac7a-b9b135cf1976",'. //subkategori
-					  '"value": ["'.$this->subkategori($r->tic_subject_id).'"]
+					  '"value": "'.$this->subkategori($r->tic_subject_id).'"
 					},
 					{
 					  "id": "58259a09-cfe5-4ac5-861b-3277d6489fe1",'. //layanan
