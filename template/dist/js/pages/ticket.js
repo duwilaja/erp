@@ -10,13 +10,13 @@ $(document).ready(function() {
     updateTicket();
     filters();
     reset();
-    socket.on('chat message', function(msg){
-        showtable();
-    });
+    //socket.on('chat message', function(msg){
+        //showtable();
+    //});
    
-    socket.on('notif', function(){
-        showtable();
-    });
+    //socket.on('notif', function(){
+        //showtable();
+    //});
     dttLayanan();
 
     // History Ticket
@@ -410,7 +410,7 @@ function createTicket() {
             },
             success: function (res) {
                 if (res.status == 1) {
-                    socket.emit('chat message', 'Ticket baru dibuat #'+res.no_ticket);
+                    //socket.emit('chat message', 'Ticket baru dibuat #'+res.no_ticket);
                     showtable();
                     toastr.success(res.msg);
                     $('#createticket')[0].reset();
@@ -907,10 +907,10 @@ function inHTicket() {
                     toastr.success(res.msg[0]);
                     if ($('input[name="idk"]').val() != $('select[name="hpic"]').val()) {
                         console.log('das');
-                        socket.emit('notif',{
+                        /*socket.emit('notif',{
                             to : $('select[name="hpic"]').val(),
                             msg : res.msg[1]
-                        });
+                        });*/
                     }   
                     getHTicket();
                     showtable();
