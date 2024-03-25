@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') or exit('No direct script access allowed');
+defined('BASEPATH') or exit ('No direct script access allowed');
 
 class MAbsensi extends CI_Model
 {
@@ -17,7 +17,7 @@ class MAbsensi extends CI_Model
 
     public function getDetail($id)
     {
-        return $this->db->query("select a.*,DATE_FORMAT(DATE_ADD(a.start_date,INTERVAL 7 HOUR),'%Y-%m-%d %H:%i') tgl_masuk,DATE_FORMAT(DATE_ADD(a.end_date,INTERVAL 7 HOUR),'%Y-%m-%d %H:%i') tgl_keluar,DATE_FORMAT(DATE_ADD(a.start_office_date,INTERVAL 7 HOUR),'%H:%i') office_masuk,DATE_FORMAT(DATE_ADD(a.end_office_date,INTERVAL 7 HOUR),'%H:%i') office_keluar,a.reason_in,a.reason_out from absensi a_erp left join absensis a on a_erp.absensis_id=a.id");
+        return $this->db->query("select a.*,DATE_FORMAT(DATE_ADD(a.start_date,INTERVAL 7 HOUR),'%Y-%m-%d %H:%i') tgl_masuk,DATE_FORMAT(DATE_ADD(a.end_date,INTERVAL 7 HOUR),'%Y-%m-%d %H:%i') tgl_keluar,DATE_FORMAT(DATE_ADD(a.start_office_date,INTERVAL 7 HOUR),'%H:%i') office_masuk,DATE_FORMAT(DATE_ADD(a.end_office_date,INTERVAL 7 HOUR),'%H:%i') office_keluar,a.reason_in,a.reason_out from absensi a_erp left join absensis a on a_erp.absensis_id=a.id WHERE a_erp.id=" . $id);
     }
     public function get($id = '', $where = '', $query = '', $limit = '', $start = '')
     {
@@ -127,7 +127,7 @@ class MAbsensi extends CI_Model
                 $d = '<a  class="text-warning" href="' . site_url('absensi/detail_data/') . $dt->id . '"><i class="fa fa-list"></i></a>';
             }
             $jamMasuk = $this->getJam($dt->tanggal);
-            $jamPulang = isset($dt->pulang) ? $dt->pulang == "-" ? "-" : $this->getJam($dt->pulang) : "-";
+            $jamPulang = isset ($dt->pulang) ? $dt->pulang == "-" ? "-" : $this->getJam($dt->pulang) : "-";
             $status = $dt->status;
             if ($dt->status == "I") {
                 if ($jamMasuk != "" && $jamPulang != "-") {
@@ -241,7 +241,7 @@ class MAbsensi extends CI_Model
                 $d = '<a  class="text-warning" href="' . site_url('absensi/detail_data/') . $dt->id . '"><i class="fa fa-list"></i></a>';
             }
             $jamMasuk = $this->getJam($dt->tanggal);
-            $jamPulang = isset($dt->pulang) ? $dt->pulang == "-" ? "-" : $this->getJam($dt->pulang) : "-";
+            $jamPulang = isset ($dt->pulang) ? $dt->pulang == "-" ? "-" : $this->getJam($dt->pulang) : "-";
             $status = $dt->status;
             if ($dt->status == "I") {
                 if ($jamMasuk != "" && $jamPulang != "-") {
