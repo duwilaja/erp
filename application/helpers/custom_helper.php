@@ -185,8 +185,9 @@ if (!function_exists('calc_minute')) {
 		$to_time = strtotime($enddate);
 		$from_time = strtotime($startdate);
 		// return round(abs($to_time - $from_time) / 60,2);
-		$menit = round(abs($to_time - $from_time) / 60,2);
-		return $menit*60;
+		//$menit = round(abs($to_time - $from_time) / 60,2);
+		//return $menit*60;
+		return abs($to_time-$from_time);
 	}
 }
 

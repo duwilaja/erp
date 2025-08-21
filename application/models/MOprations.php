@@ -122,7 +122,7 @@ class MOprations extends CI_Model {
     
     public function getReportTicket($bulan='',$tahun='',$status='',$custend='',$tgl_mulai='',$tgl_akhir='')
     {
-        $this->db->select('t.id,tn.node,tsc.s_closed,t.ctddone,ticketno,dtm,lastupd,c.custend,t.node_id,nama_kategori,nama_subject,t.status,t.body,t.notes,nama,layanan,p.name as provinsi');
+        $this->db->select('t.id,tn.node,tsc.s_closed,t.ctddone,ticketno,dtm,lastupd,c.custend,t.node_id,nama_kategori,nama_subject,t.status,t.body,t.notes,nama,layanan,p.name as provinsi,t.sla');
 
         if ($tgl_mulai != '' && $tgl_akhir != '') {
             $this->db->where('DATE(dtm) >= DATE("'.$tgl_mulai.'")');
@@ -485,17 +485,17 @@ class MOprations extends CI_Model {
         
     }
 
-    public function cekSla($v='')
+    public function cekSla($v='',$s='')
     {
         if ($v != '') {
             if ($v == 1) {
-                return '<span style="color:#FFF;padding:5px;border-radius:4px;background:#6f42c1;" >Ciritcal<span>';
+                return $s==''?'<span style="color:#FFF;padding:5px;border-radius:4px;background:#6f42c1;" >Ciritcal<span>':'Critical';
             }else if($v == 2){
-                return '<span style="color:#FFF;padding:5px;border-radius:4px;background:#dc3545;">High<span>';
+                return $s==''?'<span style="color:#FFF;padding:5px;border-radius:4px;background:#dc3545;">High<span>':'High';
             }else if($v == 3){
-                return '<span style="color:#FFF;padding:5px;border-radius:4px;background:#fd7e14;">Medium<span>';
+                return $s==''?'<span style="color:#FFF;padding:5px;border-radius:4px;background:#fd7e14;">Medium<span>':'Medium';
             }else if($v == 4){
-                return '<span style="color:#FFF;padding:5px;border-radius:4px;background:#20c997;">Low<span>';
+                return $s==''?'<span style="color:#FFF;padding:5px;border-radius:4px;background:#20c997;">Low<span>':'Low';
             }
         }
     }
@@ -816,7 +816,7 @@ class MOprations extends CI_Model {
         if ($id != '') {
           $this->db->where('tl.id', $id);
         }else if ($cust_end != '') {
-          $this->db->where('tl.cust_end_id', $cust_end);
+          $this->db->where(['tl.cust_end_id'=> $cust_end,['dele'=>'N']);
         }
         
         $q =  $this->db->get('tic_layanan tl');
@@ -841,7 +841,7 @@ class MOprations extends CI_Model {
          // Set searchable column fields
          $CI->dt->column_search = ['l.layanan','c.custend'];
          // Set select column fields
-         $CI->dt->select = 's.id,l.layanan,c.custend';
+         $CI->dt->select = 's.id,l.layanan,c.custend,s.dele';
          // Set default order
          $CI->dt->order = ['s.id' => 'desc'];
         
@@ -861,6 +861,7 @@ class MOprations extends CI_Model {
                  $i,
                  $dt->custend,
                  $dt->layanan,
+				 $dt->dele,
                  '<button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#mEditTicLayanan"  onclick="getEditTicLayanan('.$dt->id.')">Edit</button> <a onclick="deTicLayanan('.$dt->id.')" class="btn btn-outline-warning">Hapus</a>',
              );
          }
