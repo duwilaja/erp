@@ -1377,7 +1377,7 @@ class Oprations extends MY_controller {
             $html .= '<td>Action</td>';
             $html .= '<td>Detail Problem</td>';
             $html .= '<td>Note</td>';
-            $html .= '<td>Action Plan</td>';
+            $html .= '<td>Urgency</td>';
         $html .= '</tr>';
        
         $q = $this->mo->getReportTicket($date,$date,$status,$custend,$tgl_mulai,$tgl_akhir);
@@ -1401,7 +1401,7 @@ class Oprations extends MY_controller {
                 $html .= '<td>'.$v->s_closed.'</td>';
                 $html .= '<td>'.$v->body.'</td>';
                 $html .= '<td>'.$v->notes.'</td>';
-                $html .= '<td></td>';
+                $html .= '<td>'.$this->mo->cekSla($v->sla,'0').'</td>';
             $html .= '</tr>';
           }
 
@@ -1477,7 +1477,7 @@ class Oprations extends MY_controller {
 
     public function deTicLayanan()
     {
-        $del = $this->db->delete('tic_layanan',['id' => $this->input->post('id')]);
+        $del = $this->db->update('tic_layanan',["dele" => 'Y'],['id' => $this->input->post('id')]);
         echo ctojson('',1,'Berhasil menghapus layanan');
     }
 

@@ -24,6 +24,7 @@
                                 <th>No</th>
                                 <th>Customer</th>
                                 <th>Layanan</th>
+								<th>Deleted?</th>
                                 <th>#</th>
                             </tr>
                         </thead>
