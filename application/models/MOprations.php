@@ -816,7 +816,7 @@ class MOprations extends CI_Model {
         if ($id != '') {
           $this->db->where('tl.id', $id);
         }else if ($cust_end != '') {
-          $this->db->where(['tl.cust_end_id'=> $cust_end,['dele'=>'N']);
+          $this->db->where(['tl.cust_end_id'=> $cust_end,'dele'=>'N']);
         }
         
         $q =  $this->db->get('tic_layanan tl');
