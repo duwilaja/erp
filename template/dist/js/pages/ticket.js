@@ -31,7 +31,13 @@ $(document).ready(function() {
     addTicSubject();
     editTicSubject();
 
-     // Layanan
+    // Klas
+    dttKlas();
+    getKlas();
+    addTicKlas();
+    editTicKlas();
+	
+	// Layanan
      dttLayanan();
      addTicLayanan();
      editTicLayanan();
@@ -283,6 +289,101 @@ function dttSubject() {
         }]
     });
 }
+
+//klas
+function dttKlas() {
+    $('#tblTicKlas').DataTable({
+        // Processing indicator
+        "bAutoWidth": false,
+        "destroy": true,
+        "searching": true,
+        "processing": true,
+        // DataTables server-side processing mode
+        "serverSide": true,
+        "scrollX": true,
+        // Initial no order.
+        "order": [],
+        // Load data from an Ajax source
+        "ajax": {
+            "url": './dtTicKlas',
+            "type": "POST",
+        },
+        //Set column definition initialisation properties
+        "columnDefs": [{
+            //"targets": [0],
+            //"orderable": false
+        }]
+    });
+}
+function addTicKlas() { 
+    $('#addTicKlas').submit(function (e) { 
+        e.preventDefault();
+        $.ajax({
+            type: "post",
+            url:'./inTicKlas',
+            data : $(this).serialize(),
+            dataType: "json",
+            success: function (res) {
+                if (res.status == 1) {
+                    dttKlas();
+                    toastr.success(res.msg);
+                    $("#mAddTicSubject").modal('hide');
+                }
+            }
+        });
+    });
+}
+function editTicKlas() { 
+    $('#edtTicKlas').submit(function (e) { 
+        e.preventDefault();
+        $.ajax({
+            type: "post",
+            url:'./upTicKlas',
+            data : $(this).serialize(),
+            dataType: "json",
+            success: function (res) {
+                if (res.status == 1) {
+                    dttKlas();
+                    toastr.success(res.msg);
+                    $("#mEditTicSubject").modal('hide');
+                }
+            }
+        });
+    });
+}
+function deTicKlas(id) { 
+    var val = 0;
+    var r = confirm("Apakah anda yakin ingin menghapus data !");
+    if (r == true) {
+        txt = "You pressed OK!";
+        val = 1;
+        $.ajax({
+            type: "POST",
+            url: "./deTicKlas/",
+            data : {'id' : id},
+            dataType: "json",
+            success: function (r) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: r.msg,
+                });
+                dttKlas();
+            }
+        });
+    } else {
+        txt = "You pressed Cancel!";
+    }
+ }
+function getKlasTicCategory(id) {
+    var c = httpGet('./getTicKlas/'+id);
+    $('input[name="e_id"]').val(c.id);
+    getKategori(c.tic_kat_id);
+    $('input[name="e_category"]').val(c.nama_kategori);
+    $('input[name="e_class"]').val(c.nama_klas);
+}
+
+
 
 function showtable(data='') {
     
@@ -701,6 +802,27 @@ function clearinp() {
         }
     });
 }
+ function getKlas(id='',kat='') { 
+    $('select[name="klas"]').html('');
+    $('select[name="e_klas"]').html('');
+    $.ajax({
+        type: "get",
+        url:'./getKlasJson?kat_id='+kat,
+        dataType: "json",
+        success: function (res) {
+            $('select[name="klas"]').html('');
+            $.each( res, function( key, value ) {
+                if (value.id == id) {
+                    $('select[name="klas"]').append("<option selected value='"+value.id+"'>"+value.nama_klas+"</option>");
+                    $('select[name="e_klas"]').append("<option selected value='"+value.id+"'>"+value.nama_klas+"</option>");
+                }else{
+                    $('select[name="klas"]').append("<option value='"+value.id+"'>"+value.nama_klas+"</option>");
+                    $('select[name="e_klas"]').append("<option value='"+value.id+"'>"+value.nama_klas+"</option>");
+                }
+            });
+        }
+    });
+}
 
 function getEditTicCategory(id) {
     var c = httpGet('./getTicCategory/'+id);
@@ -776,13 +898,13 @@ function deTicCategory(id) {
 function getSubjectTicCategory(id) {
     var c = httpGet('./getTicSubject/'+id);
     $('input[name="e_id"]').val(c.id);
-    getKategori(c.tic_ktg_id);
+    getKlas(c.tic_ktg_id);
     $('input[name="e_category"]').val(c.nama_kategori);
     $('input[name="e_subject"]').val(c.nama_subject);
 }
 
 function getSubject(id='') { 
-    var idKat = $('select[name="kategori"]').val();
+    var idKat = $('select[name="klas"]').val();
     $('select[name="subject"]').html('');
     $.ajax({
         type: "get",
@@ -937,7 +1059,7 @@ function inHTicket() {
         url: './getSubjectJson?tic_ktg_id='+id,
         dataType: "json",
         success: function (r) {
-            var subject = '';
+            var subject = '<option  value=""></option>';
             
             r.forEach(v => {
                 subject +=  '<option value="'+v.id+'">'+v.nama_subject+'</option>';
@@ -948,6 +1070,25 @@ function inHTicket() {
     });
  }
 
+ function pilihKlas(id) { 
+    $('#i_klas').html('');
+    $.ajax({
+        type: "GET",
+        url: './getKlasJson?kat_id='+id,
+        dataType: "json",
+        success: function (r) {
+            var subject = '<option  value=""></option>';
+            
+            r.forEach(v => {
+                subject +=  '<option value="'+v.id+'">'+v.nama_klas+'</option>';
+            });
+
+            $('#i_klas').html(subject);
+			pilihSubject(0);
+        }
+    });
+ }
+ 
 //  Privinsi
 function getProvinsi(id) { 
     $('select[name="i_provinsi"]').html('');

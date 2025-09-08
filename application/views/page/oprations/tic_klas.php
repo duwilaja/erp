@@ -5,7 +5,7 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-md-6 col">
-                            Ticket Subject
+                            Ticket Classification
                         </div>
                         <div class="col-md-6 col text-right">
                             <a href="#" class="btn btn-outline-danger" data-toggle="modal" data-target="#mAddTicSubject"><i class="fas fa-plus"></i> Add</a>
@@ -13,12 +13,12 @@
                     </div>
                 </div>
                 <div class="card-body table-responsive">
-                    <table id="tblTicSubject" class="table">
+                    <table id="tblTicKlas" class="table">
                         <thead>
                             <tr>
                                 <th>ID</th>
+                                <th>Category</th>
                                 <th>Classification</th>
-                                <th>Subject</th>
                                 <th>#</th>
                             </tr>
                         </thead>
@@ -34,22 +34,22 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Add Ticket Subject</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Add Ticket Classification</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <form action="javascript:void(0);" id="addTicSubject">
+          <form action="javascript:void(0);" id="addTicKlas">
               <div class="form-group">
-                  <label for="">Classification</label>
-                  <select name="klas" class="form-control" >
+                  <label for="">Category</label>
+                  <select name="kategori" class="form-control" >
                       <option></option>
                   </select>
               </div>
               <div class="form-group">
-                  <label for="">Subject</label>
-                  <input type="text" name="subject" class="form-control" >
+                  <label for="">Classification</label>
+                  <input type="text" name="class" class="form-control" >
               </div>
               <div class="xna text-right">
                 <input type="submit" class="btn btn-warning" value="Save">
@@ -65,23 +65,23 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="mTicSubject">Edit Ticket Subject</h5>
+          <h5 class="modal-title" id="mTicSubject">Edit Ticket Classification</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <form action="javascript:void(0);" id="edtTicSubject">
+          <form action="javascript:void(0);" id="edtTicKlas">
               <div class="form-group">
-                  <label for="">Classification</label>
-                  <select name="e_klas" class="form-control" >
+                  <label for="">Category</label>
+                  <select name="e_kategori" class="form-control" >
                       <option></option>
                   </select>
               </div>
               <div class="form-group">
-                  <label for="">Subject</label>
+                  <label for="">Classification</label>
                   <input type="hidden" name="e_id" class="form-control" >
-                  <input type="text" name="e_subject" class="form-control" >
+                  <input type="text" name="e_class" class="form-control" >
               </div>
               <div class="xna text-right">
                 <input type="submit" class="btn btn-warning" value="Save">

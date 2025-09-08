@@ -198,7 +198,7 @@
                         <div class="col-md-4">
                             <div class="form-group mb-2">
                                 <label>Category</label>
-                                <select class="form-control form-control-sm" name="i_kategori" onchange="pilihSubject(this.value)">
+                                <select class="form-control form-control-sm" name="i_kategori" onchange="pilihKlas(this.value)">
                                     <option value=""></option>
                                     <?php foreach ($tic_kategori as $v) { ?>
                                     <option value="<?=$v->id;?>"><?=$v->nama_kategori;?></option>
@@ -208,12 +208,17 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group mb-2">
+                                <label>Klasifikasi</label>
+                                <select class="form-control form-control-sm" name="i_klas" id="i_klas" onchange="pilihSubject(this.value)">
+								<option value=""></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group mb-2">
                                 <label>Subject</label>
                                 <select class="form-control form-control-sm" name="i_subject" id="i_subject">
                                     <option value=""></option>
-                                    <option value="problem">Problem</option>
-                                    <option value="change">Change Request</option>
-                                    <option value="information">Information</option>
                                 </select>
                             </div>
                         </div>
@@ -230,7 +235,7 @@
                                 </select>								
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="form-group mb-2">
                                 <label>Assigned To</label>
                                 <select class="form-control form-control-sm" name="i_pic">
@@ -238,7 +243,7 @@
                                 </select>							
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="form-group mb-2">
                                 <label>SLA/Urgency</label>
                                 <select class="form-control form-control-sm" name="i_sla" id="sla" required>
@@ -367,22 +372,27 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="form-group mb-2">
                                 <label>Category</label>
-                                <select class="form-control form-control-sm" name="kategori" onchange="getSubject(this.value)">
+                                <select class="form-control form-control-sm" name="kategori" onchange="getKlas('',this.value)">
                                     <option value=""></option>
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
+                            <div class="form-group mb-2">
+                                <label>Category</label>
+                                <select class="form-control form-control-sm" name="klas" onchange="getSubject(this.value)">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
                             <div class="form-group mb-2">
                                 <label>Subject</label>
                                 <select class="form-control form-control-sm" name="subject" id="i_subject">
                                     <option value=""></option>
-                                    <option value="problem">Problem</option>
-                                    <option value="change">Change Request</option>
-                                    <option value="information">Information</option>
                                 </select>
                             </div>
                         </div>
