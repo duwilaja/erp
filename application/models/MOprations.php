@@ -512,6 +512,21 @@ class MOprations extends CI_Model {
         return $q;
         
     }
+	
+	// Ticket Klas
+    public function tic_klas($id='',$kat_id='')
+    {
+        if ($id != '') {
+          $q =  $this->db->get_where('tic_klas',['id' => $id]);
+        }else if ($kat_id != '') {
+            $q =  $this->db->get_where('tic_klas',['tic_kat_id' => $kat_id]);
+        }else{
+           $q =  $this->db->get('tic_klas');
+        }
+
+        return $q;
+        
+    }
 
       // Ticket Subject
       public function tic_subject($id='',$tic_ktg_id='')
@@ -733,16 +748,16 @@ class MOprations extends CI_Model {
          // Set table name
          $CI->dt->table = 'tic_subject s';
          // Set orderable column fields
-         $CI->dt->column_order = [null, 'c.nama_kategori','s.nama_subject'];
+         $CI->dt->column_order = [null, 'c.nama_klas','s.nama_subject'];
          // Set searchable column fields
-         $CI->dt->column_search = ['c.nama_kategori','s.nama_subject'];
+         $CI->dt->column_search = ['c.nama_klas','s.nama_subject'];
          // Set select column fields
-         $CI->dt->select = 's.id,c.nama_kategori,s.nama_subject';
+         $CI->dt->select = 's.id,c.nama_klas,s.nama_subject';
          // Set default order
          $CI->dt->order = ['c.id' => 'desc'];
  
          $condition = [
-             ['join','tic_kategori c','c.id = s.tic_ktg_id','inner']
+             ['join','tic_klas c','c.id = s.tic_ktg_id','left']
          ];
  
          // Fetch member's records
@@ -754,7 +769,7 @@ class MOprations extends CI_Model {
              $i++;
              $data[] = array(
                  $i,
-                 $dt->nama_kategori,
+                 $dt->nama_klas,
                  $dt->nama_subject,
                  '<button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#mEditTicSubject"  onclick="getSubjectTicCategory('.$dt->id.')">Edit</button> <a onclick="deTicSubject('.$dt->id.')" class="btn btn-outline-warning">Hapus</a>',
              );
@@ -770,7 +785,58 @@ class MOprations extends CI_Model {
          // Output to JSON format
          return json_encode($output);
      }
-
+	
+	//Klas
+     public function dtTicKlas()
+     {
+         // Definisi
+         $condition = '';
+         $data = [];
+ 
+         $CI = &get_instance();
+         $CI->load->model('DataTable', 'dt');
+ 
+         // Set table name
+         $CI->dt->table = 'tic_klas s';
+         // Set orderable column fields
+         $CI->dt->column_order = [null, 'c.nama_kategori','s.nama_klas'];
+         // Set searchable column fields
+         $CI->dt->column_search = ['c.nama_kategori','s.nama_klas'];
+         // Set select column fields
+         $CI->dt->select = 's.id,c.nama_kategori,s.nama_klas';
+         // Set default order
+         $CI->dt->order = ['s.id' => 'desc'];
+ 
+         $condition = [
+             ['join','tic_kategori c','c.id = s.tic_kat_id','left']
+         ];
+ 
+         // Fetch member's records
+         $dataTabel = $this->dt->getRows($_POST, $condition);
+ 
+         $i = $_POST['start'];
+         $del = "'Are you sure to delete this data ?'";
+         foreach ($dataTabel as $dt) {
+             $i++;
+             $data[] = array(
+                 $i,
+                 $dt->nama_kategori,
+                 $dt->nama_klas,
+                 '<button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#mEditTicSubject"  onclick="getKlasTicCategory('.$dt->id.')">Edit</button> <a onclick="deTicKlas('.$dt->id.')" class="btn btn-outline-warning">Hapus</a>',
+             );
+         }
+ 
+         $output = array(
+             "draw" => $_POST['draw'],
+             "recordsTotal" => $this->dt->countAll($condition),
+             "recordsFiltered" => $this->dt->countFiltered($_POST, $condition),
+             "data" => $data,
+         );
+ 
+         // Output to JSON format
+         return json_encode($output);
+     }
+	 
      // Ticketing Layanan
      public function get_tic_layanan($id='')
      {

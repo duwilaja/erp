@@ -316,6 +316,19 @@ class Oprations extends MY_controller {
         }
         echo json_encode($q);
     }
+	public function getKlasJson()
+    {
+        $id = $this->input->get('id');
+        $tic_kat_id = $this->input->get('kat_id');
+        if ($id != '') {
+            $q = $this->mo->tic_klas($id)->result();
+        }else if ($tic_kat_id != '') {
+            $q = $this->mo->tic_klas('',$tic_kat_id)->result();
+        }else{
+            $q = $this->mo->tic_klas()->result();
+        }
+        echo json_encode($q);
+    }
 
     public function getSubjectJson()
     {
@@ -1149,7 +1162,7 @@ class Oprations extends MY_controller {
     {
         $obj = [
             'nama_subject' => $this->input->post('subject'),
-            'tic_ktg_id' => $this->input->post('kategori')
+            'tic_ktg_id' => $this->input->post('klas')
         ];
 
         $k = $this->db->insert('tic_subject', $obj);
@@ -1167,7 +1180,7 @@ class Oprations extends MY_controller {
     {
         $obj = [
             'nama_subject' => $this->input->post('e_subject'),
-            'tic_ktg_id' => $this->input->post('e_kategori')
+            'tic_ktg_id' => $this->input->post('e_klas')
         ];
 
         $k = $this->db->update('tic_subject', $obj,['id' => $this->input->post('e_id')]);
@@ -1202,6 +1215,74 @@ class Oprations extends MY_controller {
             ]
 		];
 		$this->load->view('_main',$d);
+    }
+	
+	//klas
+	public function inTicKlas()
+    {
+        $obj = [
+            'nama_klas' => $this->input->post('class'),
+            'tic_kat_id' => $this->input->post('kategori')
+        ];
+
+        $k = $this->db->insert('tic_klas', $obj);
+        $c = $this->db->affected_rows();
+        if ($c > 0) {
+            $resl = ctojson('',1,'Berhasil menambahkan Klasifikasi');
+        }else{
+            $resl = ctojson('',0,'Gagal menambahkan Klasifikasi');
+        }
+
+        echo $resl;
+    }
+	public function upTicKlas()
+    {
+        $obj = [
+            'nama_klas' => $this->input->post('e_class'),
+            'tic_kat_id' => $this->input->post('e_kategori')
+        ];
+
+        $k = $this->db->update('tic_klas', $obj,['id' => $this->input->post('e_id')]);
+        $c = $this->db->affected_rows();
+        if ($c > 0) {
+            $resl = ctojson('',1,'Berhasil mengubah Klasifikasi');
+        }else{
+            $resl = ctojson('',0,'Gagal mengubah Klasifikasi');
+        }
+
+        echo $resl;
+    }
+	public function deTicKlas()
+    {
+        $del = $this->db->delete('tic_klas',['id' => $this->input->post('id')]);
+        echo ctojson('',1,'Berhasil menghapus Klasifikasi');
+    }
+	public function tic_klas()
+    {
+        $d = [
+			'title' => 'Ticket Classification',
+			'linkView' => 'page/oprations/tic_klas',
+            'fileScript' => 'ticket.js',
+            'dtRahasia' => 'dtMyticket/1',
+			'bread' => [
+				'nama' => 'Ticket Classification',
+				'data' => [
+					['nama' => '','link' => site_url('oprations/my_ticket'),'active' => 'active'],
+				]
+            ]
+		];
+		$this->load->view('_main',$d);
+    }
+	public function dtTicKlas()
+	{
+		echo $this->mo->dtTicKlas();
+    }
+	public function getTicKlas($id='')
+    {
+        $k = $this->db->get_where('tic_klas',['id' => $id]);
+        if ($k->num_rows() > 0) {
+            echo json_encode($k->row());
+        }    
     }
 
     // Privilage
