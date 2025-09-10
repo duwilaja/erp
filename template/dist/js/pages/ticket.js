@@ -7,6 +7,7 @@ $(document).ready(function() {
     showtable();
     createTicket();
     getiCost();
+	getiCust();
     updateTicket();
     filters();
     reset();
@@ -462,7 +463,7 @@ function getCost(id='',name='') {
         url:'../customers/getEndCustomer/',
         dataType: "json",
         success: function (res) {
-            $('select[name="'+name+'"]').html('<option value="">-- Pilih Customer --</option>');
+            $('select[name="'+name+'"]').html('<option value="">-- Pilih End Customer --</option>');
             $.each( res, function( key, value ) {
                 if (value.id == id) {
                     $('select[name="'+name+'"]').append("<option selected value='"+value.id+"'>"+value.custend+"</option>");
@@ -481,12 +482,30 @@ function getiCost(id='') {
         url:url+'customers/getEndCustomer/',
         dataType: "json",
         success: function (res) {
-            $('select[name="i_customer"]').html('<option value="">-- Pilih Customer --</option>');
+            $('select[name="i_customer"]').html('<option value="">-- Pilih End Customer --</option>');
             $.each( res, function( key, value ) {
                 if (value.id == id) {
                     $('select[name="i_customer"]').append("<option selected value='"+value.id+"'>"+value.custend+"</option>");
                 }else{
                     $('select[name="i_customer"]').append("<option value='"+value.id+"'>"+value.custend+"</option>");
+                }
+            });
+        }
+    });
+}
+function getiCust(id='') { 
+    $('select[name="i_cust"]').html('');
+    $.ajax({
+        type: "get",
+        url:url+'customers/getCustomer/',
+        dataType: "json",
+        success: function (res) {
+            $('select[name="i_cust"]').html('<option value="">-- Pilih Customer --</option>');
+            $.each( res, function( key, value ) {
+                if (value.id == id) {
+                    $('select[name="i_cust"]').append("<option selected value='"+value.id+"'>"+value.customer+"</option>");
+                }else{
+                    $('select[name="i_cust"]').append("<option value='"+value.id+"'>"+value.customer+"</option>");
                 }
             });
         }
@@ -1196,6 +1215,30 @@ function get_node_cl(id='',name='i_node') {
             });
         }
     });
+}
+function get_aset(id=''){
+	var name='i_aset';
+	$('select[name="'+name+'"]').html('');
+	var lay=$("#i_layanan option:selected").text();
+	if(lay!=''){
+		$.ajax({
+			type: "post",
+			url:'./get_aset',
+			data: {layanan:},
+			dataType: "json",
+			success: function (res) {
+				console.log(res);
+				$('select[name="'+name+'"]').html('<option value=""></option>');
+					$.each( res.rows, function( key, value ) {
+					if (value.id == id) {
+						$('select[name="'+name+'"]').append("<option selected value='"+value.name+"'>"+value.name+"</option>");
+					}else{
+						$('select[name="'+name+'"]').append("<option value='"+value.name+"'>"+value.name+"</option>");
+					}
+				});
+			}
+		});
+	}
 }
 
 function get_node(id='',name='node_id') { 

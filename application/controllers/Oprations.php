@@ -1576,6 +1576,26 @@ class Oprations extends MY_controller {
         }    
     }
 
+	public function get_aset(){
+		$lay=urlencode($this->input->post('layanan'));
+		$result='';
+		if(trim($lay)!=''){
+			$url='https://itam.estrada.co.id/api/v1/hardware?limit=2&offset=0&sort=created_at&order=desc';
+			$url='https://itam.estrada.co.id/api/v1/hardware?search='.$lay;
+			$token='Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIzIiwianRpIjoiNzJmYjM3M2IwYzRhOGE5ODI3OTY2ZmRhYjMwNDA4MzM4ZDYxOTRmYzA3OGUyNjY1MTY3NTQ5MWRiYzYyMGQ0MGI5YjA1ZjE3ZmJlMzdjNmUiLCJpYXQiOjE3NTEwMzM2OTguNjc3MDA2LCJuYmYiOjE3NTEwMzM2OTguNjc3MDA4LCJleHAiOjMwMTMzMzc2OTYuMjQ2ODg2LCJzdWIiOiI3Iiwic2NvcGVzIjpbXX0.Mxju_GeqPc7GAOH3flO1DPU0OxHPqyp417HZuyHU4PVrP-j4ShtGBHaXgSuYw_bqbKGctrPRDsfOWIfDtWD3ZEYpsFvNx2ddZ68DG3U4LHxRmmyFRTGIDDNNd56CXMkOwl-nIzqJkjFWB46IgcjO1W1feljTmxaZke41dCBnh0dDceguupNuQp_Q4t9GJm5MgTFgic8BYgxixGnxsdOL9OC-4JhAQtN025UwSEbLvieemsOlgyu-pd_jdNifZA7fcycmdK8xFjZmluxi7dUFZS7lWO2JAo48DFEy-iLu8OcFzBcejsix4T5O5SqedkyyJ7632ofuVXkMwUYKQLNTdRDm7OOs5hHzmpFV0EUYHRZnSLg24zKwqR3l-qjC5_MsRNcbw199HskgIJ5_5cQ6yRjbbhcYyMbGipTh-IC1jWt7ttOBgu_OwPY2zO9qlBx_s6WAjIR-zssbSUfRvKSkt5ZpJHbKyYXc_Wvp0jU9_yyqCOwAPE8ndBmkh6Us_xu6vt3Q4_O8xugEuuBnhoQGerOHy_PT1AutDo1Hd60HIZ-T9DMT--TglewNfMh2shFKRHtHy3YHUZs2oQrNnEP7wN0NLwYtXj73Mi2_G3PKjtxhcCmaz7wyMlDi3p_BNT4pV565hXDUvl8mA4_4ETbn4scIpNLC3ayCMm3jKCYMZ1c';
+		
+			$ch = curl_init($url); 
+			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+			//curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+			curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json','Authorization: '.$token));
+			$result = curl_exec($ch);
+			curl_close($ch);
+		}
+		
+		echo $result;
+	}
+	
     public function getLayananJson()
     {
         $id = $this->input->get('id');
