@@ -1224,7 +1224,7 @@ function get_aset(id=''){
 		$.ajax({
 			type: "post",
 			url:'./get_aset',
-			data: {layanan:},
+			data: {layanan:lay},
 			dataType: "json",
 			success: function (res) {
 				console.log(res);
