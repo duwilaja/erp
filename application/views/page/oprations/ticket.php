@@ -169,11 +169,19 @@
             <form method="post"  id="createticket" action="javascript:void(0)" >
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-3">
                             <div class="form-group mb-2">
                                 <label>Customer</label>
-                                <select required class="form-control form-control-sm" name="i_customer" onchange="getCusTicLayanan(this.value,'i_layanan')">
+                                <select required class="form-control form-control-sm" name="i_cust">
                                     <option value="">- Choose Customer -</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group mb-2">
+                                <label>End Customer</label>
+                                <select required class="form-control form-control-sm" name="i_customer" onchange="getCusTicLayanan(this.value,'i_layanan')">
+                                    <option value="">- Choose End Customer -</option>
                                 </select>
                             </div>
                         </div>
@@ -187,7 +195,7 @@
                         <div class="col-md-3">
                             <div class="form-group mb-2">
                                 <label>Layanan</label>
-                                <select class="form-control form-control-sm" name="i_layanan" onchange="get_node_cl('','i_node_id')">
+                                <select class="form-control form-control-sm" name="i_layanan" id="i_layanan" onchange="get_node_cl('','i_node_id'); get_aset();">
                                     <option value=""></option>
                                     <!--?php foreach (@$layanan as $v) { ?>
                                     <option value="< ?=$v->id;?>">< ?=$v->layanan;?></option>
@@ -222,7 +230,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group mb-2">
                                 <label>Group</label>
                                 <select class="form-control form-control-sm" onchange="getiPIC(this);" name="i_grp" id="grp" aria-invalid="false" required>
@@ -243,10 +251,22 @@
                                 </select>							
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group mb-2">
                                 <label>SLA/Urgency</label>
                                 <select class="form-control form-control-sm" name="i_sla" id="sla" required>
+                                    <option value=""></option>
+                                    <option value="1">Critical</option>
+                                    <option value="2">High</option>
+                                    <option value="3">Medium</option>
+                                    <option value="4">Low</option>
+                                </select>						
+                            </div>
+                        </div>
+						<div class="col-md-2">
+                            <div class="form-group mb-2">
+                                <label>Impact</label>
+                                <select class="form-control form-control-sm" name="i_impact" id="impact" required>
                                     <option value=""></option>
                                     <option value="1">Critical</option>
                                     <option value="2">High</option>
@@ -280,18 +300,24 @@
                                 <option value=""></option>
                             </select>
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="form-group mb-2">
                                 <label>Nama Lokasi</label>
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                         <select class="form-control form-control-sm" name="i_node_id"></select>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-6" style="display:none;">
                                         <input class="form-control form-control-sm" name="i_node_id_inp" placeholder="tulis nama lokasi disini kalau dipilihan sebelah kiri gak ada!">
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label>Asset</label>
+                            <select class="form-control form-control-sm" name="i_aset" id="i_aset">
+                                <option value=""></option>
+                            </select>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group mb-2">
@@ -299,13 +325,19 @@
                                 <input class="form-control form-control-sm" name="i_alamat">
                             </div>
                         </div>
-                        <div class="col-md-6">
+						<div class="col-md-4">
+                            <div class="form-group mb-2">
+                                <label>Short Desc</label>
+                                <input class="form-control form-control-sm" name="i_singkat">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
                             <div class="form-group mb-2">
                                 <label>Detail</label>
                                 <textarea class="form-control form-control-sm" name="i_body"></textarea>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="form-group mb-2">
                                 <label>Notes</label>
                                 <textarea class="form-control form-control-sm" name="i_notes"></textarea>
