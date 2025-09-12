@@ -254,7 +254,7 @@
                         <div class="col-md-3">
                             <div class="form-group mb-2">
                                 <label>SLA/Urgency</label>
-                                <select class="form-control form-control-sm" name="i_sla" id="sla" required>
+                                <select class="form-control form-control-sm" name="i_sla" required>
                                     <option value=""></option>
                                     <option value="1">Critical</option>
                                     <option value="2">High</option>
@@ -266,7 +266,7 @@
 						<div class="col-md-2">
                             <div class="form-group mb-2">
                                 <label>Impact</label>
-                                <select class="form-control form-control-sm" name="i_impact" id="impact" required>
+                                <select class="form-control form-control-sm" name="i_impact" required>
                                     <option value=""></option>
                                     <option value="1">Critical</option>
                                     <option value="2">High</option>
@@ -378,11 +378,19 @@
             <form method="post"  id="updateticket" action="javascript:void(0)" >
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-3">
                             <div class="form-group mb-2">
                                 <label>Customer</label>
-                                <select class="form-control form-control-sm" name="customert" onchange="getCusTicLayanan(this.value,'layanant')">
+                                <select required class="form-control form-control-sm" name="custome">
                                     <option value="">- Choose Customer -</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group mb-2">
+                                <label>End Customer</label>
+                                <select class="form-control form-control-sm" name="customert" onchange="getCusTicLayanan(this.value,'layanant')">
+                                    <option value="">- Choose End Customer -</option>
                                 </select>
                             </div>
                         </div>
@@ -414,8 +422,8 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group mb-2">
-                                <label>Category</label>
-                                <select class="form-control form-control-sm" name="klas" onchange="getSubject(this.value)">
+                                <label>Klasifikasi</label>
+                                <select class="form-control form-control-sm" name="e_klas" onchange="getSubject(this.value)">
                                     <option value=""></option>
                                 </select>
                             </div>
@@ -442,6 +450,18 @@
                         </div>
                         <div class="col-md-3">
                             <div class="form-group mb-2">
+                                <label>Impact</label>
+                                <select class="form-control form-control-sm" name="impact" id="impact" required>
+                                    <option value=""></option>
+                                    <option value="1">Critical</option>
+                                    <option value="2">High</option>
+                                    <option value="3">Medium</option>
+                                    <option value="4">Low</option>
+                                </select>						
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group mb-2">
                                 <label>Provinsi</label>
                                 <select class="form-control form-control-sm" name="provinsi" id="provinsi" onchange="getKota(this.value)" aria-required="true" aria-invalid="false">
                                     <option value=""></option>
@@ -457,10 +477,16 @@
                             </div>
                         </div>
                         
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="form-group mb-2">
                                 <label>Nama Lokasi </label>
                                 <input class="form-control form-control-sm" readonly name="node_id">
+                            </div>
+                        </div>
+						<div class="col-md-6">
+                            <div class="form-group mb-2">
+                                <label>Aset </label>
+                                <input class="form-control form-control-sm" readonly name="aset">
                             </div>
                         </div>
 
@@ -472,6 +498,12 @@
                         </div>
 
                         <div class="col-md-6">
+                            <div class="form-group mb-2">
+                                <label>Short Desc </label>
+                                <input class="form-control form-control-sm" name="singkat">
+                            </div>
+                        </div>
+						<div class="col-md-6">
                             <div class="form-group mb-2">
                                 <label>Detail</label>
                                 <textarea class="form-control form-control-sm" name="body"></textarea>

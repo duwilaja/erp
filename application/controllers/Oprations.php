@@ -444,6 +444,11 @@ class Oprations extends MY_controller {
         "lastupd" => date('Y-m-d H:i:s'),
         "updby" => $this->session->userdata('karyawan_id'),
         "file" => $file,
+		"cust" => $this->input->post("i_cust"),
+		"klas" => $this->input->post("i_klas"),
+		"impact" => $this->input->post("i_impact"),
+		"aset" => $this->input->post("i_aset"),
+		"shortdesc" => $this->input->post("i_singkat")
         ];
 
         $th = [ 
@@ -586,6 +591,11 @@ class Oprations extends MY_controller {
         // "notes" => $this->input->post("notes"),
         "updBy" => $this->session->userdata('karyawan_id'),
         "lastupd" => date('Y-m-d H:i:s'),
+        "cust" => $this->input->post("custome"),
+		"klas" => $this->input->post("klas"),
+		"impact" => $this->input->post("impact"),
+		//"aset" => $this->input->post("i_aset"),
+		"shortdesc" => $this->input->post("singkat")
         ];
 
         $th = [ 
@@ -1878,7 +1888,7 @@ class Oprations extends MY_controller {
         echo json_encode($q->result());
     }
 
-    public function node_sample()
+    public function node_samplex()
 	{
 		$spreadsheet = new Spreadsheet();
 		$sheet = $spreadsheet->getActiveSheet();
@@ -1911,6 +1921,40 @@ class Oprations extends MY_controller {
 
 		$writer->save('php://output');
     }
+	
+	function node_sample(){
+		//include APPPATH.'third_party/PHPExcel/PHPExcel.php';
+		require APPPATH.'third_party\PHPExcel\PHPExcel.php';
+		require APPPATH.'third_party\PHPExcel\PHPExcel\Writer\CSV.php';
+
+        $objPHPExcel    =   new PHPExcel();
+		$objPHPExcel->setActiveSheetIndex(0);
+		$objPHPExcel->getActiveSheet()->SetCellValue('A1', 'Node');
+		$objPHPExcel->getActiveSheet()->SetCellValue('B1', 'Cust');
+		$objPHPExcel->getActiveSheet()->SetCellValue('C1', 'Layanan');
+		$objPHPExcel->getActiveSheet()->SetCellValue('D1', 'Cust ID');
+		$objPHPExcel->getActiveSheet()->SetCellValue('E1', 'Layanan ID');
+		
+		$xx= 2;
+		for ($i=0; $i < @count($this->input->post('cust_id')); $i++) { 
+			for ($x=0; $x < $this->input->post('qty')[$i]; $x++) {
+				$objPHPExcel->getActiveSheet()->SetCellValue('A'.$xx, '');
+				$objPHPExcel->getActiveSheet()->SetCellValue('B'.$xx, $this->mc->getEnd($this->input->post('cust_id')[$i])->row()->custend);
+				$objPHPExcel->getActiveSheet()->SetCellValue('C'.$xx, $this->mo->tic_layanan($this->input->post('tic_layanan_id')[$i])->row()->layanan);
+				$objPHPExcel->getActiveSheet()->SetCellValue('D'.$xx, $this->input->post('cust_id')[$i]);
+				$objPHPExcel->getActiveSheet()->SetCellValue('E'.$xx, $this->input->post('tic_layanan_id')[$i]);
+				$xx++;
+			}
+		}
+		
+		$filename = 'node_'.date('Ymdhis');
+		//$objWriter  =   new PHPExcel_Writer_Excel2007($objPHPExcel);
+		header('Content-Type: text/csv'); //mime type
+		header('Content-Disposition: attachment;filename="'.$filename.'.csv"');
+		header('Cache-Control: max-age=0'); //no cache
+		$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'CSV'); 
+		$objWriter->save('php://output');
+	}
     
     // Import Node
 	public function import_node()
