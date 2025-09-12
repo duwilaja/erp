@@ -111,7 +111,7 @@ function getCustLayanan(id='',name='') {
     });
 }
 
-function getCusTicLayanan(id='',name='') { 
+function getCusTicLayanan(id='',name='',idx='') { 
     if(name == '') name = 'layanan';
     $('select[name="'+name+'"]').html('');
     $.ajax({
@@ -121,8 +121,8 @@ function getCusTicLayanan(id='',name='') {
         success: function (res) {
             $('select[name="'+name+'"]').html('<option value="">All Layanan</option>');
                 $.each( res, function( key, value ) {
-                if (value.id == id) {
-                    $('select[name="'+name+'"]').append("<option value='"+value.id+"'>"+value.layanan+"</option>");
+                if (value.id == idx) {
+                    $('select[name="'+name+'"]').append("<option selected value='"+value.id+"'>"+value.layanan+"</option>");
                 }else{
                     $('select[name="'+name+'"]').append("<option value='"+value.id+"'>"+value.layanan+"</option>");
                 }
@@ -495,6 +495,7 @@ function getiCost(id='') {
 }
 function getiCust(id='') { 
     $('select[name="i_cust"]').html('');
+    $('select[name="custome"]').html('');
     $.ajax({
         type: "get",
         url:url+'customers/getCustomer/',
@@ -504,8 +505,10 @@ function getiCust(id='') {
             $.each( res, function( key, value ) {
                 if (value.id == id) {
                     $('select[name="i_cust"]').append("<option selected value='"+value.id+"'>"+value.customer+"</option>");
+					$('select[name="custome"]').append("<option selected value='"+value.id+"'>"+value.customer+"</option>");
                 }else{
                     $('select[name="i_cust"]').append("<option value='"+value.id+"'>"+value.customer+"</option>");
+					$('select[name="custome"]').append("<option value='"+value.id+"'>"+value.customer+"</option>");
                 }
             });
         }
@@ -576,22 +579,23 @@ function editTicket(id='') {
         data : $(this).serialize(),
         dataType: "json",
         success: function (res) {
-           setTimeout(() => {
-            getCost('','customert');
-            getCusTicLayanan(res.customer,'layanant');
+//           setTimeout(() => {
+            getCost(res.customer,'customert');
+            getCusTicLayanan(res.customer,'layanant',res.tic_layanan_id);
             getProvinsi(res.prov_id);
             get_node(res.tic_node_id,'node_id');
             getKota(res.prov_id,res.kota_id);
             getKategori(res.tic_ktg_id);
-            setTimeout(() => {
-                getSubject(res.tic_subject_id);
-            }, 300);
+			getKlas(res.klas,res.tic_ktg_id);
+//            setTimeout(() => {
+                getSubject(res.tic_subject_id,res.klas);
+//            }, 300);
             $('input[name="reporter"]').val(res.reporter);
-            setTimeout(() => {
-                $('select[name="customert"]').val(res.customer);
-                $('select[name="layanant"]').val(res.tic_layanan_id);
-                console.log(res.tic_layanan_id);
-            }, 500);
+//            setTimeout(() => {
+                //$('select[name="customert"]').val(res.customer);
+                //$('select[name="layanant"]').val(res.tic_layanan_id);
+                //console.log(res.tic_layanan_id);
+//            }, 500);
             $('input[name="h_ticket_id"]').val(res.id);
             $('input[name="id"]').val(res.id);
             $('input[name="dtm"]').val(res.dtm);
@@ -600,7 +604,7 @@ function editTicket(id='') {
             $('input[name="createdBy"]').val(res.createdBy);
             $('input[name="alamat"]').val(res.alamat);
             
-            $('select[name="subject"]').html('<option value=""></option> <option value="problem" '+cekSelected(res.subject,'problem')+'>Problem</option> <option value="change" '+cekSelected(res.subject,'change')+'>Change Request</option> <option value="information" '+cekSelected(res.subject,'information')+'>Information</option>');
+            //$('select[name="subject"]').html('<option value=""></option> <option value="problem" '+cekSelected(res.subject,'problem')+'>Problem</option> <option value="change" '+cekSelected(res.subject,'change')+'>Change Request</option> <option value="information" '+cekSelected(res.subject,'information')+'>Information</option>');
             
             //$('select[name="grp"]').html('<option value=""></option> <option '+cekSelected(res.grp,'oprlvl1')+' value="oprlvl1">C3</option> <option '+cekSelected(res.grp,'oprlvl1bali')+' value="oprlvl1bali">C3 Bali</option> <option '+cekSelected(res.grp,'oprlvl2')+' value="oprlvl2">OPR Level 2</option> <option '+cekSelected(res.grp,'oprlvl3')+' value="oprlvl3">OPR Level 3</option> <option '+cekSelected(res.grp,'oprlvl4')+' value="oprlvl4">Level 4</option><option '+cekSelected(res.grp,'oprlvl5')+' value="oprlvl5">Level 5</option>');
             $('select[name="grp"]').val(res.grp);
@@ -608,14 +612,20 @@ function editTicket(id='') {
             //$('select[name="status"]').html('<option value=""></option> <option '+cekSelected(res.status,'new')+' value="new">new</option> <option '+cekSelected(res.status,'pending')+' value="pending">pending</option> <option '+cekSelected(res.status,'progress')+' value="progress">progress</option> <option '+cekSelected(res.status,'resolved')+' value="resolved">resolved</option> <option '+cekSelected(res.status,'closed')+' value="closed">closed</option>');
 			$('select[name="status"]').val(res.status);
 			
-            $('select[name="sla"]').html('<option value=""></option> <option '+cekSelected(res.sla,'1')+' value="1">Critical</option> <option '+cekSelected(res.sla,'2')+' value="2">High</option> <option '+cekSelected(res.sla,'3')+' value="3">Medium</option> <option '+cekSelected(res.sla,'4')+' value="4">Low</option>');
-
+            //$('select[name="sla"]').html('<option value=""></option> <option '+cekSelected(res.sla,'1')+' value="1">Critical</option> <option '+cekSelected(res.sla,'2')+' value="2">High</option> <option '+cekSelected(res.sla,'3')+' value="3">Medium</option> <option '+cekSelected(res.sla,'4')+' value="4">Low</option>');
+			$('select[name="sla"]').val(res.sla);
+			
             getPIC('',res.pic,res.grp);
 
             $('textarea[name="body"]').text(res.body);
             $('textarea[name="notes"]').text(res.notes);
+			
+			$('select[name="custome"]').val(res.cust);
+			$('select[name="impact"]').val(res.impact);
+			$('select[name="aset"]').val(res.aset);
+			$('input[name="singkat"]').val(res.shortdesc);
 
-           }, 700);
+//           }, 700);
             
         }
     });
@@ -792,7 +802,7 @@ function clearinp() {
     
     $('select[name="status"]').html('');
 
-    $('select[name="sla"]').html('');
+    //$('select[name="sla"]').html('');
 
     $('textarea[name="body"]').text('');
 
@@ -922,8 +932,8 @@ function getSubjectTicCategory(id) {
     $('input[name="e_subject"]').val(c.nama_subject);
 }
 
-function getSubject(id='') { 
-    var idKat = $('select[name="klas"]').val();
+function getSubject(id='',idKat='') { 
+    if(idKat=='') idKat = $('select[name="klas"]').val();
     $('select[name="subject"]').html('');
     $.ajax({
         type: "get",
@@ -1218,7 +1228,7 @@ function get_node_cl(id='',name='i_node') {
 }
 function get_aset(id=''){
 	var name='i_aset';
-	$('select[name="'+name+'"]').html('');
+	$('select[name="'+name+'"]').html('<option value=""></option>');
 	var lay=$("#i_layanan option:selected").text();
 	if(lay!=''){
 		$.ajax({
@@ -1228,7 +1238,6 @@ function get_aset(id=''){
 			dataType: "json",
 			success: function (res) {
 				console.log(res);
-				$('select[name="'+name+'"]').html('<option value=""></option>');
 					$.each( res.rows, function( key, value ) {
 					if (value.id == id) {
 						$('select[name="'+name+'"]').append("<option selected value='"+value.name+"'>"+value.name+"</option>");
@@ -1248,8 +1257,8 @@ function get_node(id='',name='node_id') {
         type: "get",
         url:'./get_node?id='+id,
         dataType: "json",
-        success: function (res) {
-            $('input[name="'+name+'"]').val(res.node);
+        success: function (resu) {
+            $('input[name="'+name+'"]').val(resu.node);
         }
     });
 }
